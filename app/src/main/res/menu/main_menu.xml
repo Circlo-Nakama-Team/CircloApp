@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:title="@string/Home" />
+    <item
+        android:id="@+id/orderFragment"
+        android:enabled="true"
+        android:title="@string/order" />
+    <item
+        android:enabled="false"
+        android:title=""
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/communityFragment"
+        android:title="@string/community" />
+    <item
+        android:id="@+id/profileFragment"
+        android:title="@string/Profile" />
+</menu>
