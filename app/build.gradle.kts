@@ -95,6 +95,8 @@ dependencies {
 
     // Shimmer loading
     implementation ("com.facebook.shimmer:shimmer:0.2.0@aar")
+
+    implementation ("com.github.jrvansuita:PickImage:3.0.2")
 }
 kapt {
     correctErrorTypes = true

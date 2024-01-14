@@ -28,6 +28,9 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.nakama.circlo.BuildConfig
+import com.nakama.circlo.MainActivity
+import com.nakama.circlo.R
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -78,26 +81,25 @@ fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int, context: Context)
     return BitmapDescriptorFactory.fromBitmap(bitmap)
 }
 
-//fun Fragment.hideBottomNavView() {
-//    val appBar: BottomAppBar = (activity as MainActivity).findViewById(R.id.menuBottom)
-//    val frameLayout: FrameLayout = (activity as MainActivity).findViewById(R.id.frameLayout)
-//    val fab: FloatingActionButton = (activity as MainActivity).findViewById(R.id.btnLiveLocation)
-//
-//    appBar.visibility = View.GONE
-//    frameLayout.visibility = View.GONE
-//    fab.visibility = View.GONE
-//}
-//
-//fun Fragment.showBottomNavView() {
-//    val appBar: BottomAppBar = (activity as MainActivity).findViewById(R.id.menuBottom)
-//    val frameLayout: FrameLayout = (activity as MainActivity).findViewById(R.id.frameLayout)
-//    val fab: FloatingActionButton = (activity as MainActivity).findViewById(R.id.btnLiveLocation)
-//
-//    appBar.visibility = View.VISIBLE
-//    frameLayout.visibility = View.VISIBLE
-//    fab.visibility = View.VISIBLE
-//}
+fun Fragment.hideBottomNavView() {
+    val appBar: BottomAppBar = (activity as MainActivity).findViewById(R.id.menuBottom)
+    val frameLayout: FrameLayout = (activity as MainActivity).findViewById(R.id.fragment_layout)
+    val fab: FloatingActionButton = (activity as MainActivity).findViewById(R.id.btn_scan)
 
+    appBar.visibility = View.GONE
+    frameLayout.visibility = View.GONE
+    fab.visibility = View.GONE
+}
+
+fun Fragment.showBottomNavView() {
+    val appBar: BottomAppBar = (activity as MainActivity).findViewById(R.id.menuBottom)
+    val frameLayout: FrameLayout = (activity as MainActivity).findViewById(R.id.fragment_layout)
+    val fab: FloatingActionButton = (activity as MainActivity).findViewById(R.id.btn_scan)
+
+    appBar.visibility = View.VISIBLE
+    frameLayout.visibility = View.VISIBLE
+    fab.visibility = View.VISIBLE
+}
 
 fun getImageUri(context: Context): Uri {
     var uri: Uri? = null
@@ -121,7 +123,7 @@ private fun getImageUriForPreQ(context: Context): Uri {
     if (imageFile.parentFile?.exists() == false) imageFile.parentFile?.mkdir()
     return FileProvider.getUriForFile(
         context,
-        "BuildConfig.APPLICATION_ID.fileprovider",
+        "${BuildConfig.APPLICATION_ID}.fileprovider",
         imageFile
     )
 

@@ -2,8 +2,18 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Circlo" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">@color/primaryGreen</item>
+         <item name="colorSecondary">@color/secondaryGreen</item>
     </style>
 
     <style name="Theme.Circlo" parent="Base.Theme.Circlo" />
+
+    <style name="ShapeAppearance.CutBorder" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Theme.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/secondaryGreen</item>
+    </style>
 </resources>

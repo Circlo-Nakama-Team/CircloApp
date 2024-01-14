@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/_16sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.scan.ResultFragment">
+
+
+    <TextView
+        android:id="@+id/tv_title_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Circlonify"
+        android:layout_marginTop="@dimen/_36sdp"
+        android:textColor="@color/greenLight"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="@dimen/_24ssp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_your_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Berikut Hasil scan sampah mu"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/rv_menu_recommendation"
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_scan_result"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_your_result"/>
+
+
+    <Button
+        android:id="@+id/btn_donation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lanjut Donasi"
+        android:fontFamily="@font/roboto_medium"
+        android:backgroundTint="@color/yellow"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintEnd_toStartOf="@id/btn_recycle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <Button
+        android:id="@+id/btn_recycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daur ulang"
+        android:fontFamily="@font/roboto_medium"
+        android:backgroundTint="@color/greenLight"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintStart_toEndOf="@id/btn_donation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
