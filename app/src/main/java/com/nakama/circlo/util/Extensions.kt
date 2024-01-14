@@ -13,7 +13,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.ColorInt
@@ -83,21 +82,17 @@ fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int, context: Context)
 
 fun Fragment.hideBottomNavView() {
     val appBar: BottomAppBar = (activity as MainActivity).findViewById(R.id.menuBottom)
-    val frameLayout: FrameLayout = (activity as MainActivity).findViewById(R.id.fragment_layout)
     val fab: FloatingActionButton = (activity as MainActivity).findViewById(R.id.btn_scan)
 
     appBar.visibility = View.GONE
-    frameLayout.visibility = View.GONE
     fab.visibility = View.GONE
 }
 
 fun Fragment.showBottomNavView() {
     val appBar: BottomAppBar = (activity as MainActivity).findViewById(R.id.menuBottom)
-    val frameLayout: FrameLayout = (activity as MainActivity).findViewById(R.id.fragment_layout)
     val fab: FloatingActionButton = (activity as MainActivity).findViewById(R.id.btn_scan)
 
     appBar.visibility = View.VISIBLE
-    frameLayout.visibility = View.VISIBLE
     fab.visibility = View.VISIBLE
 }
 

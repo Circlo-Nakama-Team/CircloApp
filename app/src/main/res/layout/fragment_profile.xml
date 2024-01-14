@@ -38,15 +38,57 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
+            android:id="@+id/view_must_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title_must_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Register or Login Now"
+                android:textColor="@color/inverseSurface"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login now"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:backgroundTint="@color/greenLight"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_campaign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/roboto"
+                android:text="Let's join us to save the earth"
+                android:textColor="@color/inverseSurface"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/view_already_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="visible"
             android:paddingVertical="@dimen/_16sdp"
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfil"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@color/secondaryGreen"
                 app:civ_border_color="@color/greenLight"
                 android:layout_gravity="center" />
@@ -60,7 +102,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="Name"
                 android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_8sdp" />
+                android:textSize="@dimen/_14ssp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -79,10 +121,11 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="1000 Circlo Points"
+                    android:text=""
                     android:textColor="@color/inverseSurface"
                     android:textSize="@dimen/_8sdp" />
             </LinearLayout>
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

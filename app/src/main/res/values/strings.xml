@@ -13,4 +13,14 @@
     <string name="first_slide_title">First Slide Title</string>
     <string name="second_slide_title">Second Slide Title</string>
     <string name="third_slide_title">Third Slide Title</string>
+    <string name="enter_valid_email_address">Please enter valid email address</string>
+    <string name="enter_valid_password">Password must contain at least 8 character</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="email_address">Email Address</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="username">Username</string>
+    <string name="have_an_account">"Don't have an account? "</string>
+    <string name="register_here">Register here</string>
 </resources>
