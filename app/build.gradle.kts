@@ -5,6 +5,7 @@ plugins {
     id ("androidx.navigation.safeargs")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -46,6 +47,8 @@ android {
 
 dependencies {
     implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
     val lifecycle_version = "2.5.0"
 
     implementation("androidx.core:core-ktx:1.9.0")

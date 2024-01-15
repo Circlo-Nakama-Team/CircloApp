@@ -88,6 +88,26 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/tl_password" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_google"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_48sdp"
+        android:paddingHorizontal="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/roboto"
+        app:icon="@drawable/ic_google"
+        app:iconGravity="start"
+        app:iconTintMode="multiply"
+        android:text="Masuk dengan Google"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
     <LinearLayout
         android:id="@+id/linear_info_register"
         android:layout_width="match_parent"
@@ -96,7 +116,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/_24sdp"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
