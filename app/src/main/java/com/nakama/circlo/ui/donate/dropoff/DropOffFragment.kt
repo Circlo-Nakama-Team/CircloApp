@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.donate.dropoff
 
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentDropOffBinding
 import com.nakama.circlo.ui.donate.DonateViewModel
 import com.nakama.circlo.util.hide
+import com.nakama.circlo.util.hideBottomNavView
 import com.nakama.circlo.util.reduceFileImage
 import com.nakama.circlo.util.show
 import com.nakama.circlo.util.timeSpinner
@@ -26,7 +28,6 @@ import com.nakama.circlo.util.uriToFile
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -46,6 +47,7 @@ class DropOffFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        hideBottomNavView()
         // Inflate the layout for this fragment
         _binding = FragmentDropOffBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -62,7 +64,27 @@ class DropOffFragment : Fragment() {
 
         setupRv()
 
-        binding.edPickupDate.transformIntoDatePicker(requireContext(), "dd/MM/yyyy")
+        // Get bundle from previous fragment
+        val imageUri = arguments?.getString("imageUri")
+        val category = arguments?.getString("category")
+        val trashTitle = arguments?.getStringArrayList("trashTitle")
+        val trashTitleString = trashTitle?.joinToString(", ")
+
+        if (imageUri != null || category != null) {
+            val uri = Uri.parse(imageUri)
+            setupRvTDonateImage()
+            adapter.addItem(uri)
+
+            binding.edDropoffDescription.setText(trashTitleString)
+            // If Category is "Organic" then radiobutton will be checked at rbPlastic radioButton
+            if (category == "Organik") {
+                binding.trashcat1.isChecked = true
+            } else {
+                binding.trashcat2.isChecked = true
+            }
+        }
+
+        binding.edPickupDate.transformIntoDatePicker(requireContext(), "yyyy-MM-dd")
         binding.tvPickupTime.timeSpinner(requireContext())
 
         binding.cvAddPhoto.setOnClickListener {
@@ -110,17 +132,22 @@ class DropOffFragment : Fragment() {
         val radioGroup = binding.chooseTrashType
         val selectedId = radioGroup.checkedRadioButtonId
         val radioButton = requireView().findViewById<RadioButton>(selectedId)
-        return radioButton.text.toString()
+        return radioButton.id.toString()
     }
 
     private fun donateNow(token: String) {
         val trashCategoriesId = "trashcat-1"
-        val address = "Jl. Raya Bogor"
-        val detailAddress = "Dekat alfa"
-        val donateMethod = "Drop Off"
-        val donateDescription = "1 kaleng"
-        val donateDate = "2024-12-12"
-        val donateSchedule = "sch_1"
+        val address = binding.tvTitleDropPoint.text.toString()
+        val detailAddress = binding.tvMainAddress.text.toString()
+        val donateMethod = "self-service"
+        val donateDescription = binding.edDropoffDescription.text.toString()
+        val donateDate = binding.edPickupDate.text.toString()
+        val donateSchedule = when (binding.tvPickupTime.text.toString()) {
+            "08:00 — 12:00" -> "sch_1"
+            "12:00 — 16:00" -> "sch_2"
+            "16:00 — 18:00" -> "sch_3"
+            else -> ""
+        }
 
         val requestCategoriesId = trashCategoriesId.toRequestBody("text/plain".toMediaTypeOrNull())
         val requestAddress = address.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -181,8 +208,7 @@ class DropOffFragment : Fragment() {
 
                 is Result.Success -> {
                     Log.d("Donate Success", it.data.toString())
-                    findNavController().navigate(DropOffFragmentDirections.actionDropOffFragmentToHomeFragment())
-                    toast("Donate Success")
+                    findNavController().navigate(DropOffFragmentDirections.actionDropOffFragmentToSuccessFragment())
                 }
 
                 is Result.Error -> {

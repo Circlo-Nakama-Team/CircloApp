@@ -412,7 +412,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/rv_menu_recommendation"
         android:layout_width="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginHorizontal="@dimen/_16sdp"
@@ -422,5 +422,139 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_article"/>
 
+    <!-- Article -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@id/tv_article">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="@dimen/_8sdp"
+            xmlns:tools="http://schemas.android.com/tools">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_ideas"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    android:src="@drawable/article_preview_1"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cara menjadikan cangkang telur menjadi bahan kerajinan"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_toEndOf="@id/ic_pickUp"/>
+
+                    <TextView
+                        android:id="@+id/tv_subhead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Organic Waste"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:textColor="@color/greenLight"
+                        android:fontFamily="@font/roboto"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_toEndOf="@id/ic_pickUp"/>
+
+                    <TextView
+                        android:id="@+id/tv_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="Ternayata cangkang telur bisa menjadi bahan kerajinan yang menarik loh. Yuk kita simak cara membuatnya!"
+                        android:maxLines="2"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_light"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_toEndOf="@id/ic_pickUp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="@dimen/_8sdp"
+            xmlns:tools="http://schemas.android.com/tools">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_ideas2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    android:src="@drawable/article_preview_2"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:text="Lima Pemuda Pandawara Group Gerakkan Bersih Sampah di Pantai Cibutun Loji Sukabumi"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_toEndOf="@id/ic_pickUp"/>
+
+                    <TextView
+                        android:id="@+id/tv_subhead2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Waste Campaign"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:textColor="@color/greenLight"
+                        android:fontFamily="@font/roboto"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_toEndOf="@id/ic_pickUp"/>
+
+                    <TextView
+                        android:id="@+id/tv_desc2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="Lima pemuda laki-laki yang terdiri dari Gilang, Ikhsan, Rifqi, Rafly, dan Agung berteman sejak masih menempuh pendidikan SMA."
+                        android:maxLines="2"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_light"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_toEndOf="@id/ic_pickUp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

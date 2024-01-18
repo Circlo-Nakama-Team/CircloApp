@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.auth
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nakama.circlo.data.UserRepository
@@ -29,8 +30,14 @@ class AuthViewModel @Inject constructor(
         email: String
     ) = repository.registerGoogle(userId, firstname, username, email)
 
-    fun logout(token: String) = repository.logout(token)
+    fun saveUser(token: String) = viewModelScope.launch {
+        try {
+            repository.saveUser(token)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d("Error Save Token", e.toString())
+        }
+    }
 
-    suspend fun saveUser(token: String) = repository.saveUser(token)
 
 }

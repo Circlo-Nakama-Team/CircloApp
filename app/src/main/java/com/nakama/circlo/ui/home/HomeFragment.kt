@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.nakama.circlo.R
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentHomeBinding
 import com.nakama.circlo.util.confirmDialog
@@ -83,6 +82,7 @@ class HomeFragment : Fragment() {
                 is Result.Success -> {
                     binding.tvName.text = "Halo, ${it.data.data?.user?.username}"
                     binding.ivProfile.glide(it.data.data?.user?.image!!)
+                    binding.tvTotalPoint.text = it.data.data.user.point.toString()
                 }
                 is Result.Error -> {
                     Log.d("LoginFragment", it.error)

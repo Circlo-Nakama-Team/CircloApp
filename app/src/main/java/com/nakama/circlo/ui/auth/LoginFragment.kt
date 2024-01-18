@@ -116,6 +116,28 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun observeGoogleLogin(userId: String, firstname: String, username: String, email: String) {
+        viewmodel.registerGoogle(userId, firstname, username, email).observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Loading -> {
+                    binding.progressIndicator.show()
+                    binding.btnLogin.isEnabled = false
+                }
+                is Result.Success -> {
+                    binding.progressIndicator.hide()
+                    toast("Login Google Success")
+                    Log.d("User Token Login", it.data.data?.credential.toString())
+                    navigateToHome(it.data.data?.credential.toString())
+                }
+                is Result.Error -> {
+                    binding.progressIndicator.hide()
+                    binding.btnLogin.isEnabled = true
+                    toast(it.error)
+                }
+            }
+        }
+    }
+
     private fun navigateToHome(token: String) {
         runBlocking {
             launch {
@@ -153,12 +175,19 @@ class LoginFragment : Fragment() {
         auth.signInWithCredential(credential)
             .addOnSuccessListener {
                 toast("Login Success")
+                val isNewUser = it.additionalUserInfo?.isNewUser ?: false
+
+                // Continue with other operations
+                navigateToHome(idToken)
+                // Save user data in ViewModel
+                viewmodel.saveUser(idToken)
+                Log.d("Account Google", it.additionalUserInfo.toString())
+                Log.d("User Google", it.user?.email.toString())
+                Log.d("Credential Google", it.credential?.signInMethod.toString())
+                Log.d("User Token Google", idToken)
             }
             .addOnFailureListener {
                 toast(it.localizedMessage)
-            }
-            .addOnCompleteListener {
-                toast("Prei")
             }
     }
 }

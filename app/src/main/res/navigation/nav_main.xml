@@ -27,7 +27,11 @@
         android:id="@+id/communityFragment"
         android:name="com.nakama.circlo.ui.community.CommunityFragment"
         android:label="fragment_community"
-        tools:layout="@layout/fragment_community" />
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_communityFragment_to_addPostFragment"
+            app:destination="@id/addPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/orderFragment"
         android:name="com.nakama.circlo.ui.order.OrderFragment"
@@ -78,6 +82,12 @@
         <action
             android:id="@+id/action_resultFragment_to_trashDetailFragment"
             app:destination="@id/trashDetailFragment" />
+        <action
+            android:id="@+id/action_resultFragment_to_pickUpFragment"
+            app:destination="@id/pickUpFragment" />
+        <action
+            android:id="@+id/action_resultFragment_to_dropOffFragment"
+            app:destination="@id/dropOffFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailProductIdeaFragment"
@@ -98,12 +108,21 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_dropOffFragment_to_successFragment"
+            app:destination="@id/successFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/pickUpFragment"
         android:name="com.nakama.circlo.ui.donate.pickup.PickUpFragment"
         android:label="fragment_pick_up"
-        tools:layout="@layout/fragment_pick_up" />
+        tools:layout="@layout/fragment_pick_up" >
+        <action
+            android:id="@+id/action_pickUpFragment_to_successFragment"
+            app:destination="@id/successFragment" />
+    </fragment>
     <fragment
         android:id="@+id/trashDetailFragment"
         android:name="com.nakama.circlo.ui.scan.TrashDetailFragment"
@@ -115,5 +134,21 @@
         <argument
             android:name="trashResult"
             app:argType="com.nakama.circlo.data.remote.response.DataTrash" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPostFragment"
+        android:name="com.nakama.circlo.ui.community.AddPostFragment"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" />
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.nakama.circlo.ui.donate.success.SuccessFragment"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success" >
+        <action
+            android:id="@+id/action_successFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

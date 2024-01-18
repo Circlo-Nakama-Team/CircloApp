@@ -4,22 +4,27 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Matrix
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.InputType
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -45,8 +50,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -140,6 +143,36 @@ fun TextView.timeSpinner(context: Context) {
                 dialog.dismiss()
             }.create().show()
         btnDonate.isEnabled = true
+    }
+}
+
+fun Fragment.setupConfirmDonateDialog(
+    onDonateClick: () -> Unit,
+    onPickupClick: () -> Unit
+) {
+    val dialog = Dialog(requireContext(), android.R.style.Theme_Dialog)
+    val view = layoutInflater.inflate(R.layout.item_choose_donate, null)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setContentView(view)
+    dialog.window?.setGravity(Gravity.BOTTOM)
+    dialog.window?.setLayout(
+        WindowManager.LayoutParams.MATCH_PARENT,
+        WindowManager.LayoutParams.WRAP_CONTENT
+    )
+    dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    dialog.show()
+
+    val btnSelfService = view.findViewById<TextView>(R.id.btn_self_service)
+    val btnPickup = view.findViewById<TextView>(R.id.btn_pickup)
+
+    btnSelfService.setOnClickListener {
+        onDonateClick()
+        dialog.dismiss()
+    }
+
+    btnPickup.setOnClickListener {
+        onPickupClick()
+        dialog.dismiss()
     }
 }
 

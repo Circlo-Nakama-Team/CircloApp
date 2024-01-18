@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nakama.circlo.R
 import com.nakama.circlo.adapter.PostItemAdapter
 import com.nakama.circlo.data.Result
-import com.nakama.circlo.data.remote.response.DataPostCommunity
 import com.nakama.circlo.data.remote.response.PostsItem
 import com.nakama.circlo.databinding.FragmentCommunityBinding
 import com.nakama.circlo.util.hide
@@ -66,6 +65,10 @@ class CommunityFragment : Fragment() {
     private fun setupView(token: String) {
         if (token != "") {
             binding.fabAddPost.show()
+            binding.fabAddPost.setOnClickListener {
+                val action = CommunityFragmentDirections.actionCommunityFragmentToAddPostFragment()
+                findNavController().navigate(action)
+            }
         } else {
             binding.fabAddPost.hide()
         }
@@ -87,6 +90,11 @@ class CommunityFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        validateUserToken()
     }
 
     override fun onDestroyView() {

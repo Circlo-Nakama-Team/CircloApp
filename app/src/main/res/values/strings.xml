@@ -10,9 +10,9 @@
     <string name="introduction_banner">Introduction Banner</string>
     <string name="get_started">Get Started</string>
     <string name="next">Next</string>
-    <string name="first_slide_title">First Slide Title</string>
-    <string name="second_slide_title">Second Slide Title</string>
-    <string name="third_slide_title">Third Slide Title</string>
+    <string name="first_slide_title">Selamat datang di CIRCLO, Ayo kita sama-sama menyelematkan bumi</string>
+    <string name="second_slide_title">Donasi sampah dan tukar dengan poin reward</string>
+    <string name="third_slide_title">Buat produk kerajinanmu ditemani dengan CIRCLO</string>
     <string name="enter_valid_email_address">Please enter valid email address</string>
     <string name="enter_valid_password">Password must contain at least 8 character</string>
     <string name="password">Password</string>
@@ -25,4 +25,5 @@
     <string name="register_here">Register here</string>
     <string name="register">Register</string>
     <string name="add_description_here">Add description here...</string>
+    <string name="add_post">Add Post</string>
 </resources>

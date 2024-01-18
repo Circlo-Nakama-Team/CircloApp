@@ -121,7 +121,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title_foto">
 
         <LinearLayout
-            android:id="@+id/linear_image"
+            android:id="@+id/linenar_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -142,12 +142,45 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_camera"/>
+                    android:src="@drawable/ic_add_camera"/>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/rv_donate_image"
+                android:layout_width="match_parent"
+                android:visibility="visible"
+                android:layout_height="wrap_content"
+                tools:itemCount="3"
+                android:orientation="horizontal"
+                android:contentDescription="List Image"
+                tools:listitem="@layout/item_donate_image"/>
         </LinearLayout>
 
     </HorizontalScrollView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tl_description"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginVertical="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:hintEnabled="false"
+        app:layout_constraintTop_toBottomOf="@id/hsv_foto">
+
+        <EditText
+            android:id="@+id/ed_dropoff_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="textStart"
+            android:gravity="start"
+            android:inputType="text"
+            android:hint="@string/add_description_here"
+            android:text="" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_title_address"
@@ -160,7 +193,7 @@
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hsv_foto"/>
+        app:layout_constraintTop_toBottomOf="@id/tl_description"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_address"
@@ -286,7 +319,7 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_donate_now"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_48sdp"
         android:layout_marginHorizontal="@dimen/_16sdp"
@@ -299,6 +332,14 @@
         app:layout_constraintTop_toBottomOf="@id/pickTimeInput"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/btn_donate_now"
+        app:layout_constraintBottom_toBottomOf="@id/btn_donate_now"
+        app:layout_constraintStart_toStartOf="@id/btn_donate_now"
+        app:layout_constraintEnd_toEndOf="@id/btn_donate_now"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

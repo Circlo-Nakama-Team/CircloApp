@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -13,14 +12,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.nakama.circlo.R
 import com.nakama.circlo.adapter.IdeasItemAdapter
 import com.nakama.circlo.adapter.TrashDetailPager
-import com.nakama.circlo.adapter.TrashResultAdapter
 import com.nakama.circlo.data.remote.response.DataTrash
-import com.nakama.circlo.data.remote.response.IdeasItem
 import com.nakama.circlo.data.remote.response.TrashIdeasItem
 import com.nakama.circlo.databinding.FragmentTrashDetailBinding
 import com.nakama.circlo.util.hide
@@ -139,18 +135,23 @@ class TrashDetailFragment : Fragment() {
                 )
             }
         }
-        when (position) {
-            trashDetailAdapter.itemCount - 1 -> {
-                btnNext.hide()
-                btnPrev.show()
-            }
-            0 -> {
-                btnPrev.hide()
-                btnNext.show()
-            }
-            else -> {
-                btnPrev.show()
-                btnNext.show()
+        if (trashDetailAdapter.itemCount == 1) {
+            btnNext.hide()
+            btnPrev.hide()
+        } else {
+            when (position) {
+                0 -> {
+                    btnPrev.hide()
+                    btnNext.show()
+                }
+                trashDetailAdapter.itemCount - 1 -> {
+                    btnPrev.show()
+                    btnNext.hide()
+                }
+                else -> {
+                    btnPrev.show()
+                    btnNext.show()
+                }
             }
         }
         setupRvProductIdeas(dataTrash.trashIdeas!![position])

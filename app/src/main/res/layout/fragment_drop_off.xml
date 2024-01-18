@@ -63,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
-            android:id="@+id/rbOrganik"
+            android:id="@+id/trashcat_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Organik"
@@ -74,7 +74,7 @@
             android:layout_marginEnd="@dimen/_16sdp"/>
 
         <RadioButton
-            android:id="@+id/rbAnOrganik"
+            android:id="@+id/trashcat_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Anorganik"
@@ -85,7 +85,7 @@
             android:layout_marginEnd="@dimen/_16sdp"/>
 
         <RadioButton
-            android:id="@+id/rbB3"
+            android:id="@+id/trashcat_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Limbah B3"
@@ -142,7 +142,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_camera"/>
+                    android:src="@drawable/ic_add_camera"/>
 
             </com.google.android.material.card.MaterialCardView>
 

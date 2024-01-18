@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nakama.circlo.R
 import com.nakama.circlo.adapter.TrashResultAdapter
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.data.remote.response.DataTrash
@@ -18,6 +19,7 @@ import com.nakama.circlo.ui.scan.viewmodel.ScanViewModel
 import com.nakama.circlo.util.hide
 import com.nakama.circlo.util.hideBottomNavView
 import com.nakama.circlo.util.reduceFileImage
+import com.nakama.circlo.util.setupConfirmDonateDialog
 import com.nakama.circlo.util.show
 import com.nakama.circlo.util.toast
 import com.nakama.circlo.util.uriToFile
@@ -118,6 +120,25 @@ class ResultFragment : Fragment() {
             btnDonation.isEnabled = true
             btnRecycle.isEnabled = true
             btnDonation.setOnClickListener {
+                val listOfCategory = data.trashIdeas?.map { it.category }
+                val listOfTitle = data.trashIdeas?.map { it.trashType }
+                val allCategoriesItem = listOfCategory?.all { it == listOfCategory[0] } ?: false
+                if (allCategoriesItem) {
+                    val bundle = Bundle()
+                    bundle.putString("imageUri", imageUri.toString())
+                    bundle.putString("category", listOfCategory!![0].toString())
+                    bundle.putStringArrayList("trashTitle", ArrayList(listOfTitle!!))
+                    setupConfirmDonateDialog(
+                        onDonateClick = {
+                            findNavController().navigate(R.id.action_resultFragment_to_dropOffFragment, bundle)
+                        },
+                        onPickupClick = {
+                            findNavController().navigate(R.id.action_resultFragment_to_pickUpFragment, bundle)
+                        }
+                    )
+                } else {
+                    toast("Sorry, your trash must be in the same category")
+                }
             }
             btnRecycle.setOnClickListener {
                 findNavController().navigate(ResultFragmentDirections.actionResultFragmentToTrashDetailFragment(data))
