@@ -6,6 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.auth.LoginFragment">
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:backgroundTint="@color/greenLight"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/progressIndicator"/>
+
 
     <TextView
         android:id="@+id/tv_title_login"
@@ -80,7 +89,6 @@
         android:layout_height="@dimen/_48sdp"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:backgroundTint="@color/greenLight"
         android:fontFamily="@font/roboto"
         android:text="@string/login"
         android:textAllCaps="false"

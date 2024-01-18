@@ -66,6 +66,7 @@ dependencies {
     // Circle Image and Glide
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:glide:4.16.0")
     //intuit
     implementation ("com.intuit.sdp:sdp-android:1.0.6")
     implementation ("com.intuit.ssp:ssp-android:1.0.6")

@@ -6,6 +6,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.auth.RegisterFragment">
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:backgroundTint="@color/greenLight"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/progressIndicator"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_44sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:backgroundTint="@android:color/transparent"
+        app:icon="@drawable/ic_back"
+        app:iconSize="@dimen/_24sdp"
+        app:iconTint="@color/inverseSurface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
         android:id="@+id/tv_title_login"
         android:layout_width="wrap_content"
@@ -14,7 +35,7 @@
         android:textColor="@color/greenLight"
         android:fontFamily="@font/roboto_medium"
         android:textSize="@dimen/_18ssp"
-        android:layout_marginTop="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_48sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +134,7 @@
         app:layout_constraintTop_toBottomOf="@id/tl_username">
 
         <com.nakama.circlo.util.customview.EmailCustomView
-            android:id="@+id/ed_login_email"
+            android:id="@+id/ed_register_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/email_address"
@@ -138,7 +159,7 @@
         app:layout_constraintTop_toBottomOf="@id/tl_email">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/ed_login_password"
+            android:id="@+id/ed_register_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
@@ -151,7 +172,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_register"
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_48sdp"
@@ -159,7 +180,7 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:backgroundTint="@color/greenLight"
         android:fontFamily="@font/roboto"
-        android:text="@string/login"
+        android:text="@string/register"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textStyle="bold"

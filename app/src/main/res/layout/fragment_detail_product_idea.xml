@@ -45,6 +45,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/iv_idea"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_120sdp"
                 android:scaleType="centerCrop"
@@ -146,7 +147,7 @@
                 android:id="@+id/tv_benefit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Long Description dmsladmsa andsnadn dnakjsndjsa ndkjasndak dnkasnd ndjasnd dnkasdkamdksamdlmaslm dlaskm"
+                android:text=""
                 android:textColor="@color/inverseSurface"
                 android:fontFamily="@font/roboto"
                 android:justificationMode="inter_word"

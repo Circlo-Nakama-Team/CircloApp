@@ -23,4 +23,6 @@
     <string name="username">Username</string>
     <string name="have_an_account">"Don't have an account? "</string>
     <string name="register_here">Register here</string>
+    <string name="register">Register</string>
+    <string name="add_description_here">Add description here...</string>
 </resources>

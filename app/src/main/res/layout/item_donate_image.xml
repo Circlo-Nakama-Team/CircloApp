@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView android:id="@+id/cv_preview1"
+    android:layout_width="@dimen/_100sdp"
+    android:layout_height="@dimen/_100sdp"
+    android:layout_marginTop="@dimen/_16sdp"
+    android:layout_marginEnd="@dimen/_16sdp"
+    app:cardBackgroundColor="@color/greyThin"
+    app:layout_constraintTop_toBottomOf="@id/cv_appbar"
+    app:cardCornerRadius="10dp"
+    app:layout_constraintStart_toStartOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_camera" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_delete1"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_alignParentEnd="true"
+            app:strokeWidth="0dp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:backgroundTint="@color/red">
+
+            <ImageView
+                android:id="@+id/iv_delete1"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_delete"/>
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -9,9 +9,11 @@
     <color name="youngBlue">#94A8DDEE</color>
     <color name="onSurfaceVariant">#44483E</color>
     <color name="greyThin">#F1F1F1</color>
+    <color name="softGrey">#A6A6A6</color>
     <color name="inverseSurface">#2E312A</color>
     <color name="yellowLight">#80FDE186</color>
     <color name="yellow">#EFAE07</color>
+    <color name="red">#F44336</color>
 
 
 </resources>

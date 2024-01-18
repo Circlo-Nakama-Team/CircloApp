@@ -19,11 +19,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1">
 
+        <LinearLayout
+            android:id="@+id/view_must_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_title_must_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/roboto_medium"
+                android:text="You must login first"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login now"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/yellow"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfile"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
+            android:visibility="visible"
             android:layout_centerHorizontal="true"
             tools:src="@color/onSurfaceVariant"
             android:layout_marginTop="@dimen/_16sdp"
@@ -36,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Halo, Nakama!"
+            android:visibility="visible"
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_medium"
             android:textSize="@dimen/_14ssp"
@@ -46,21 +77,25 @@
 
         <TextView
             android:id="@+id/tv_welcome"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Selamat Datang di Circlo"
-            android:textColor="@color/white"
             android:fontFamily="@font/roboto"
+            android:text="Sudahkah kamu daur ulang sampahmu hari ini?"
+            android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@id/ivProfile"
-            app:layout_constraintTop_toBottomOf="@id/tv_name"
-            app:layout_constraintStart_toStartOf="@id/tv_name"/>
+            app:layout_constraintEnd_toStartOf="@+id/btn_notif"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
         <ImageButton
             android:id="@+id/btn_notif"
             android:layout_width="@dimen/_48sdp"
             android:layout_height="@dimen/_48sdp"
             android:src="@drawable/ic_notification"
+            android:visibility="visible"
             android:backgroundTint="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/ivProfile"

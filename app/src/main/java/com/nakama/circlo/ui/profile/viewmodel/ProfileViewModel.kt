@@ -18,7 +18,9 @@ class ProfileViewModel @Inject constructor(
         return repository.getUser().asLiveData()
     }
 
-    fun clear() = viewModelScope.launch {
+    fun logout() = viewModelScope.launch {
         repository.clear()
     }
+
+    fun getProfile(token: String) = repository.getProfile(token)
 }

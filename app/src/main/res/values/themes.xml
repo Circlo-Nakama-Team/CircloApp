@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Circlo" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/primaryGreen</item>
+         <item name="colorPrimary">@color/greenLight</item>
          <item name="colorSecondary">@color/secondaryGreen</item>
     </style>
 
@@ -15,5 +15,14 @@
 
     <style name="Theme.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/secondaryGreen</item>
+    </style>
+
+    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Customize your date picker here -->
+        <item name="colorAccent">@color/greenLight</item>
+        <item name="colorSecondary">@color/greenLight</item>
+        <item name="color">@color/greenLight</item>
+        <item name="colorControlNormal">@color/greenLight</item>
+        <!-- Add more customizations as needed -->
     </style>
 </resources>

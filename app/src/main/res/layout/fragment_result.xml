@@ -7,7 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.scan.ResultFragment">
 
-
     <TextView
         android:id="@+id/tv_title_section"
         android:layout_width="wrap_content"
@@ -36,7 +35,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:id="@+id/rv_menu_recommendation"
+        android:id="@+id/rv_trash_result"
         android:layout_width="match_parent"
         android:visibility="visible"
         android:layout_height="wrap_content"
@@ -53,6 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lanjut Donasi"
+        android:enabled="false"
         android:fontFamily="@font/roboto_medium"
         android:backgroundTint="@color/yellow"
         android:layout_marginBottom="@dimen/_16sdp"
@@ -64,10 +64,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Daur ulang"
+        android:enabled="false"
         android:fontFamily="@font/roboto_medium"
-        android:backgroundTint="@color/greenLight"
-        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintTop_toTopOf="@id/btn_donation"
         app:layout_constraintStart_toEndOf="@id/btn_donation"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_500sdp"
+        app:layout_constraintTop_toBottomOf="@id/tv_your_result"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/progressBar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

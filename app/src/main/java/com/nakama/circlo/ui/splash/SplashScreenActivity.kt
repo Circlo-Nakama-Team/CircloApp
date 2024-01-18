@@ -5,8 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
-import com.nakama.circlo.MainActivity
-import com.nakama.circlo.R
+import com.nakama.circlo.ui.MainActivity
 import com.nakama.circlo.databinding.ActivitySplashScreenBinding
 import com.nakama.circlo.ui.onboarding.OnBoardingActivity
 

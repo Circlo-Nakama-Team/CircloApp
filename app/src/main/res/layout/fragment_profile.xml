@@ -37,6 +37,13 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent">
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
+
         <LinearLayout
             android:id="@+id/view_must_login"
             android:layout_width="match_parent"
@@ -89,7 +96,6 @@
                 android:id="@+id/ivProfil"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@color/secondaryGreen"
                 app:civ_border_color="@color/greenLight"
                 android:layout_gravity="center" />
 
@@ -100,7 +106,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Name"
                 android:textColor="@color/inverseSurface"
                 android:textSize="@dimen/_14ssp" />
 

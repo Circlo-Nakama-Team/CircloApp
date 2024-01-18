@@ -1,6 +1,9 @@
 package com.nakama.circlo.util
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
@@ -11,12 +14,19 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.InputType
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.FileProvider
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -28,15 +38,19 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nakama.circlo.BuildConfig
-import com.nakama.circlo.MainActivity
+import com.nakama.circlo.ui.MainActivity
 import com.nakama.circlo.R
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+
 
 private const val MAXIMAL_SIZE = 1000000 //1 MB
 private const val FILENAME_FORMAT = "yyyyMMdd_HHmmss"
@@ -60,6 +74,103 @@ fun Fragment.toast(msg: String) {
 
 fun ImageView.glide(url: String) {
     Glide.with(this).load(url).into(this)
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun AppCompatEditText.transformIntoDatePicker(context: Context, format: String, maxDate: Date? = null) {
+    isFocusableInTouchMode = false
+    isClickable = true
+    isFocusable = false
+
+    val currentDate = Calendar.getInstance()
+    val formatter = SimpleDateFormat(format, Locale.UK)
+    val formattedDate = formatter.format(currentDate.time)
+
+    setText(formattedDate)
+
+    val datePickerOnDateSetListener =
+        DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+            currentDate.set(Calendar.YEAR, year)
+            currentDate.set(Calendar.MONTH, monthOfYear)
+            currentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            setText(formatter.format(currentDate.time))
+        }
+
+    setOnClickListener {
+        val datePickerDialog = DatePickerDialog(
+            context,
+            R.style.MyDatePickerDialogTheme,
+            datePickerOnDateSetListener,
+            currentDate.get(Calendar.YEAR),
+            currentDate.get(Calendar.MONTH),
+            currentDate.get(Calendar.DAY_OF_MONTH)
+        )
+
+        // Convert maxDate to milliseconds if provided
+        maxDate?.let { datePickerDialog.datePicker.maxDate = it.time }
+
+        datePickerDialog.show()
+        datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.greenLight))
+        datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.greenLight))
+    }
+}
+
+fun TextView.timeSpinner(context: Context) {
+    isFocusableInTouchMode = false
+    isClickable = true
+    isFocusable = false
+
+    val btnDonate = rootView.findViewById<TextView>(R.id.btn_donate_now)
+
+    val timeList = arrayOf("08:00 — 12:00", "12:00 — 16:00", "16:00 — 18:00")
+    inputType = InputType.TYPE_NULL
+    setText("")
+
+    val spinnerTime: ArrayAdapter<String> = ArrayAdapter<String>(
+        context,
+        android.R.layout.simple_spinner_dropdown_item,
+        timeList
+    )
+
+    this.setOnClickListener {
+        AlertDialog.Builder(context)
+            .setTitle("Select Time")
+            .setAdapter(spinnerTime) { dialog, which ->
+                setText(timeList[which])
+                dialog.dismiss()
+            }.create().show()
+        btnDonate.isEnabled = true
+    }
+}
+
+fun confirmDialog(
+    context: Context,
+    title: String,
+    message: String,
+    positiveButton: String,
+    negativeButton: String,
+    positiveAction: () -> Unit
+) {
+    AlertDialog.Builder(context).apply {
+        setTitle(title)
+        setMessage(message)
+        setPositiveButton(positiveButton) { _, _ ->
+            positiveAction()
+        }
+        setNegativeButton(negativeButton) { dialog, _ ->
+            dialog.dismiss()
+        }
+        create()
+        show()
+    }
+}
+
+@SuppressLint("SimpleDateFormat")
+fun convertDate(inputDate: String): String {
+    val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(inputDate)
+    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+    return formatter.format(date!!)
 }
 
 fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int, context: Context): BitmapDescriptor {

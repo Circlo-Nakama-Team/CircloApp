@@ -1,9 +1,14 @@
 package com.nakama.circlo.data.remote.retrofit
 
 import com.nakama.circlo.data.remote.response.AuthResponse
+import com.nakama.circlo.data.remote.response.CommunityResponse
+import com.nakama.circlo.data.remote.response.DonateResponse
+import com.nakama.circlo.data.remote.response.ScanResponse
 import com.nakama.circlo.data.remote.response.UserResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.DELETE
+import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -15,21 +20,31 @@ import retrofit2.http.Path
 
 interface ApiService {
 
+    // Auth
     @FormUrlEncoded
     @POST("auth/register")
     suspend fun register(
-        @Path("firstname") firstname: String,
-        @Path("lastname") lastname: String,
-        @Path("username") username: String,
-        @Path("email") email: String,
-        @Path("password") password: String,
+        @Field("firstname") firstname: String,
+        @Field("lastname") lastname: String,
+        @Field("username") username: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+    ): AuthResponse
+
+    @FormUrlEncoded
+    @POST("auth/register-google")
+    suspend fun registerGoogle(
+        @Field("userId") userId: String,
+        @Field("firstname") firstname: String,
+        @Field("username") username: String,
+        @Field("email") email: String
     ): AuthResponse
 
     @FormUrlEncoded
     @POST("auth/login")
     suspend fun login(
-        @Path("email") email: String,
-        @Path("password") password: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
     ): AuthResponse
 
     @POST("auth/logout")
@@ -37,6 +52,7 @@ interface ApiService {
         @Header("Authorization") token: String
     ): AuthResponse
 
+    // User
     @GET("user/profile")
     suspend fun getAuthUser(
         @Header("Authorization") token: String
@@ -81,4 +97,58 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("addressId") addressId: String
     ): UserResponse
+
+    // Community
+    @GET("community")
+    suspend fun getCommunityPost(): CommunityResponse
+
+    @Multipart
+    @POST("community/post")
+    suspend fun addPost(
+        @Header("Authorization") token: String,
+        @Part("postBody") postBody: RequestBody,
+        @Part image: MultipartBody.Part,
+    ): CommunityResponse
+
+    @POST("community/post")
+    suspend fun addPostNoImage(
+        @Header("Authorization") token: String,
+        @Field("postBody") postBody: String
+    ): CommunityResponse
+
+    @PUT("community/post/{postId}/likes/add")
+    suspend fun likePost(
+        @Header("Authorization") token: String,
+        @Path("postId") postId: String
+    ): CommunityResponse
+
+    @PUT("community/post/{postId}/likes/add")
+    suspend fun unlikePost(
+        @Header("Authorization") token: String,
+        @Path("postId") postId: String
+    ): CommunityResponse
+
+    // Scan
+    @Multipart
+    @POST("trash/ideas")
+    suspend fun scanTrash(
+        @Header("Authorization") token: String,
+        @Part image: MultipartBody.Part
+    ): ScanResponse
+
+    // Donate Trash
+    @POST("donate")
+    @Multipart
+    suspend fun donateTrash(
+        @Header("Authorization") token: String,
+        @Part("trashCategoriesId") trashCategoriesId: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part("address_detail") detailAddress: RequestBody,
+        @Part("donate_method") donateMethod: RequestBody,
+        @Part("donate_description") donateDescription: RequestBody,
+        @Part("donate_date") donateDate: RequestBody,
+        @Part("donate_schedule") donateSchedule: RequestBody,
+        @Part image: List<MultipartBody.Part>,
+
+        ): DonateResponse
 }

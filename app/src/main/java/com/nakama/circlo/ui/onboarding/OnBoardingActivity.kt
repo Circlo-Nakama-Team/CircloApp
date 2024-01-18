@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
-import com.nakama.circlo.MainActivity
+import com.nakama.circlo.ui.MainActivity
 import com.nakama.circlo.R
 import com.nakama.circlo.adapter.OnBoardingAdapter
 import com.nakama.circlo.databinding.ActivityOnBoardingBinding
