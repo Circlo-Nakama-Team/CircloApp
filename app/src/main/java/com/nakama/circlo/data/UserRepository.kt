@@ -19,10 +19,10 @@ class UserRepository @Inject constructor(
     private val apiService: ApiService,
     private val dataStore: DataStoreManager
 ) {
-    fun login(email: String, password: String): LiveData<Result<AuthResponse>> = liveData {
+    fun login(email: String, password: String, fcmToken: String): LiveData<Result<AuthResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.login(email, password)
+            val response = apiService.login(email, password, fcmToken)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
@@ -44,11 +44,12 @@ class UserRepository @Inject constructor(
         lastname: String,
         username: String,
         email: String,
-        password: String
+        password: String,
+        fcmToken: String
     ): LiveData<Result<AuthResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.register(firstname, lastname, username, email, password)
+            val response = apiService.register(firstname, lastname, username, email, password, fcmToken)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))

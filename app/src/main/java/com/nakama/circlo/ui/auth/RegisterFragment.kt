@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentRegisterBinding
@@ -13,6 +14,7 @@ import com.nakama.circlo.util.confirmDialog
 import com.nakama.circlo.util.hideBottomNavView
 import com.nakama.circlo.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -20,6 +22,7 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private val viewmodel by viewModels<AuthViewModel>()
+    private lateinit var fcmToken: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -42,7 +45,10 @@ class RegisterFragment : Fragment() {
                 findNavController().navigateUp()
             }
             btnRegister.setOnClickListener {
-                validateRegister()
+                viewLifecycleOwner.lifecycleScope.launch {
+                    fcmToken = viewmodel.getFcmToken()
+                    validateRegister()
+                }
             }
         }
     }
@@ -70,12 +76,12 @@ class RegisterFragment : Fragment() {
             binding.edRegisterEmail.requestFocus()
         }
         else {
-            observeRegister(firstname, lastname, username, email, password)
+            observeRegister(firstname, lastname, username, email, password, fcmToken)
         }
     }
 
-    private fun observeRegister(firstname: String, lastname: String, username: String, email: String, password: String) {
-        viewmodel.register(firstname, lastname, username, email, password).observe(viewLifecycleOwner) {
+    private fun observeRegister(firstname: String, lastname: String, username: String, email: String, password: String, fcmToken: String) {
+        viewmodel.register(firstname, lastname, username, email, password, fcmToken).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
                     binding.progressIndicator.show()

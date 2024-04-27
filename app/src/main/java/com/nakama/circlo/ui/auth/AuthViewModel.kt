@@ -16,15 +16,16 @@ class AuthViewModel @Inject constructor(
     private val repository: UserRepository
 ) : ViewModel() {
 
-    fun login(email: String, password: String) = repository.login(email, password)
+    fun login(email: String, password: String, fcmToken: String) = repository.login(email, password, fcmToken)
 
     fun register(
         firstname: String,
         lastname: String,
         username: String,
         email: String,
-        password: String
-    ) = repository.register(firstname, lastname, username, email, password)
+        password: String,
+        fcmToken: String
+    ) = repository.register(firstname, lastname, username, email, password, fcmToken)
 
     fun registerGoogle(
         firstname: String,

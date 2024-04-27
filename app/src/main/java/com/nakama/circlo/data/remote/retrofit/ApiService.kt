@@ -29,6 +29,7 @@ interface ApiService {
         @Field("username") username: String,
         @Field("email") email: String,
         @Field("password") password: String,
+        @Field("fcmToken") fcmToken: String
     ): AuthResponse
 
     @FormUrlEncoded
@@ -50,6 +51,7 @@ interface ApiService {
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String,
+        @Field("fcmToken") fcmToken: String
     ): AuthResponse
 
     @POST("auth/logout")

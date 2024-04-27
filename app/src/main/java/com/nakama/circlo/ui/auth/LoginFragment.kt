@@ -94,12 +94,12 @@ class LoginFragment : Fragment() {
             binding.edLoginPassword.error = "Password cannot be empty"
             binding.edLoginPassword.requestFocus()
         } else {
-            observeLogin(email, password)
+            observeLogin(email, password, fcmToken)
         }
     }
 
-    private fun observeLogin(email: String, password: String) {
-        viewmodel.login(email, password).observe(viewLifecycleOwner) {
+    private fun observeLogin(email: String, password: String, fcmToken: String) {
+        viewmodel.login(email, password, fcmToken).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
                     binding.progressIndicator.show()
