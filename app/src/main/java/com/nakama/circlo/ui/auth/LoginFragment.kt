@@ -7,12 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.GetCredentialResponse
+import androidx.credentials.exceptions.GetCredentialException
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nakama.circlo.ui.MainActivity
@@ -23,6 +28,7 @@ import com.nakama.circlo.util.Constants.SERVER_CLIENT_ID
 import com.nakama.circlo.util.hideBottomNavView
 import com.nakama.circlo.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -34,14 +40,14 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewmodel by viewModels<AuthViewModel>()
+    private lateinit var fcmToken: String
+    private lateinit var userToken: String
 
     var auth = FirebaseAuth.getInstance()
-     lateinit var gsc: GoogleSignInClient
 
     companion object {
-        const val RC_SIGN_IN = 120
+        const val TAG = "Login Fragment"
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,13 +63,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(SERVER_CLIENT_ID)
-            .requestEmail()
-            .build()
-        gsc = GoogleSignIn.getClient(requireContext(), gso)
         setupAction()
-
     }
 
     private fun setupAction() {
@@ -72,7 +72,11 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
             btnGoogle.setOnClickListener {
-                googleSignIn()
+                viewLifecycleOwner.lifecycleScope.launch {
+                    fcmToken = viewmodel.getFcmToken()
+                    googleSignIn()
+                }
+
             }
             btnLogin.setOnClickListener {
                 validateLogin()
@@ -116,8 +120,13 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun observeGoogleLogin(userId: String, firstname: String, username: String, email: String) {
-        viewmodel.registerGoogle(userId, firstname, username, email).observe(viewLifecycleOwner) {
+    private fun observeRegisterGoogleAccount(
+        firstname: String,
+        username: String,
+        email: String,
+        fcmToken: String
+    ) {
+        viewmodel.registerGoogle(firstname, username, email, fcmToken).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
                     binding.progressIndicator.show()
@@ -125,13 +134,17 @@ class LoginFragment : Fragment() {
                 }
                 is Result.Success -> {
                     binding.progressIndicator.hide()
-                    toast("Login Google Success")
-                    Log.d("User Token Login", it.data.data?.credential.toString())
-                    navigateToHome(it.data.data?.credential.toString())
+                    Log.d("Response Register", it.data.toString())
+                    navigateToHome(userToken)
+                    Log.d("User Token new", fcmToken)
                 }
                 is Result.Error -> {
                     binding.progressIndicator.hide()
                     binding.btnLogin.isEnabled = true
+                    if (it.error.equals("HTTP 400 ")) {
+                        navigateToHome(userToken)
+                        Log.d("User Token already", fcmToken)
+                    }
                     toast(it.error)
                 }
             }
@@ -150,22 +163,60 @@ class LoginFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun googleSignIn() {
-        val signInIntent = gsc.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+    private suspend fun googleSignIn() {
+        val credentialManager = CredentialManager.create(requireContext())
+        val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
+            .setFilterByAuthorizedAccounts(false)
+            .setServerClientId(SERVER_CLIENT_ID)
+            .setNonce("")
+            .build()
+
+        val request: GetCredentialRequest = GetCredentialRequest.Builder()
+                .addCredentialOption(googleIdOption)
+                .build()
+
+        coroutineScope {
+            launch {
+                try {
+                    val result = credentialManager.getCredential(
+                        request = request,
+                        context = requireContext(),
+                    )
+                    handleSignIn(result)
+                } catch (e: GetCredentialException) {
+                    Log.e(TAG, "Get credential error", e)
+                }
+            }
+        }
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                e.printStackTrace()
-                toast(e.localizedMessage)
+    private fun handleSignIn(result: GetCredentialResponse) {
+        val credential = result.credential
+
+        when (credential) {
+            is CustomCredential -> {
+                if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+                    try {
+                        val googleIdTokenCredential = GoogleIdTokenCredential
+                            .createFrom(credential.data)
+
+                        userToken = googleIdTokenCredential.idToken
+                        firebaseAuthGoogle(googleIdTokenCredential.idToken)
+                        Log.d(TAG, googleIdTokenCredential.idToken)
+                    } catch (e: GoogleIdTokenParsingException) {
+                        toast("Received an invalid google id token response")
+                        Log.e(TAG, "Received an invalid google id token response", e)
+                    }
+                } else {
+                    // Catch any unrecognized custom credential type
+                    toast("Unexpected type of credential")
+                    Log.e(TAG, "Unexpected type of credential")
+                }
+            }
+
+            else -> {
+                // Catch any unrecognized credential type here.
+                Log.e(TAG, "Unexpected type of credential")
             }
         }
     }
@@ -175,16 +226,12 @@ class LoginFragment : Fragment() {
         auth.signInWithCredential(credential)
             .addOnSuccessListener {
                 toast("Login Success")
-                val isNewUser = it.additionalUserInfo?.isNewUser ?: false
-
-                // Continue with other operations
-                navigateToHome(idToken)
-                // Save user data in ViewModel
-                viewmodel.saveUser(idToken)
-                Log.d("Account Google", it.additionalUserInfo.toString())
-                Log.d("User Google", it.user?.email.toString())
-                Log.d("Credential Google", it.credential?.signInMethod.toString())
-                Log.d("User Token Google", idToken)
+                observeRegisterGoogleAccount(
+                    it.user?.displayName.toString(),
+                    it.user?.displayName.toString(),
+                    it.user?.email.toString(),
+                    fcmToken
+                )
             }
             .addOnFailureListener {
                 toast(it.localizedMessage)

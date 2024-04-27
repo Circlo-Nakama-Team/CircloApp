@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".CircloApplication"
@@ -29,7 +30,27 @@
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
-            android:exported="false"/>
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="circloapp" android:host="auth" android:path="/callback" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".notification.PushNotificationServices"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo_circlo" />
 
         <meta-data
             android:name="preloaded_fonts"

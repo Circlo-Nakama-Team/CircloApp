@@ -41,7 +41,7 @@ object AppModule {
     @Provides
     fun provideApiService(client: OkHttpClient): ApiService {
         return Retrofit.Builder()
-            .baseUrl("https://circlo-backend2-sxilj6bmva-et.a.run.app/")
+            .baseUrl("https://1e67-125-167-153-27.ngrok-free.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

@@ -1,6 +1,5 @@
 package com.nakama.circlo.data
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.google.gson.Gson
@@ -14,7 +13,6 @@ import com.nakama.circlo.data.remote.retrofit.ApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
-import retrofit2.http.Path
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
@@ -25,6 +23,16 @@ class UserRepository @Inject constructor(
         emit(Result.Loading)
         try {
             val response = apiService.login(email, password)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun authGoogle(authToken: String) : LiveData<Result<AuthResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.oauthGoogle(authToken)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
@@ -48,14 +56,14 @@ class UserRepository @Inject constructor(
     }
 
     fun registerGoogle(
-        userId: String,
         firstname: String,
         username: String,
-        email: String
+        email: String,
+        fcmToken: String
     ): LiveData<Result<AuthResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.registerGoogle(userId, firstname, username, email)
+            val response = apiService.registerGoogle(firstname, username, email, fcmToken)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))

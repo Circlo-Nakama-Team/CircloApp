@@ -34,11 +34,16 @@ interface ApiService {
     @FormUrlEncoded
     @POST("auth/register-google")
     suspend fun registerGoogle(
-        @Field("userId") userId: String,
         @Field("firstname") firstname: String,
         @Field("username") username: String,
-        @Field("email") email: String
+        @Field("email") email: String,
+        @Field("fcmToken") fcmToken: String
     ): AuthResponse
+
+    @GET("auth/oauth/token?authtoken={authToken}")
+    suspend fun oauthGoogle(
+        @Path("authToken") authToken: String
+    ) : AuthResponse
 
     @FormUrlEncoded
     @POST("auth/login")
@@ -151,4 +156,5 @@ interface ApiService {
         @Part image: List<MultipartBody.Part>,
 
         ): DonateResponse
+
 }

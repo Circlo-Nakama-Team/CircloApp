@@ -1,13 +1,21 @@
 package com.nakama.circlo.ui.home
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentHomeBinding
 import com.nakama.circlo.util.confirmDialog
@@ -15,7 +23,10 @@ import com.nakama.circlo.util.glide
 import com.nakama.circlo.util.hide
 import com.nakama.circlo.util.show
 import com.nakama.circlo.util.showBottomNavView
+import com.nakama.circlo.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -38,6 +49,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getUserToken()
+        askNotificationPermission()
+        viewLifecycleOwner.lifecycleScope.launch {
+            getFcmToken()
+        }
     }
 
     private fun getUserToken() {
@@ -132,5 +147,41 @@ class HomeFragment : Fragment() {
             ) {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
             }
+    }
+
+    private suspend fun getFcmToken() {
+        val token = Firebase.messaging.token.await()
+        Log.d("FCM Token", token)
+    }
+
+    // Declare the launcher at the top of your Activity/Fragment:
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // FCM SDK (and your app) can post notifications.
+            toast("Notification is enabled")
+            viewLifecycleOwner.lifecycleScope.launch {
+                getFcmToken()
+            }
+        } else {
+            toast("Notification is disabled")
+        }
+    }
+
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                // FCM SDK (and your app) can post notifications.
+            } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+
+            } else {
+                // Directly ask for the permission
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -18,5 +19,4 @@ class SharedViewModel @Inject constructor(
         return repository.getUser().asLiveData()
     }
 
-    fun getProfile(token: String) = repository.getProfile(token)
 }

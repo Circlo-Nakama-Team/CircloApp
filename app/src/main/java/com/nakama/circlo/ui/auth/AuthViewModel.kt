@@ -3,9 +3,12 @@ package com.nakama.circlo.ui.auth
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import com.nakama.circlo.data.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,11 +27,11 @@ class AuthViewModel @Inject constructor(
     ) = repository.register(firstname, lastname, username, email, password)
 
     fun registerGoogle(
-        userId: String,
         firstname: String,
         username: String,
-        email: String
-    ) = repository.registerGoogle(userId, firstname, username, email)
+        email: String,
+        fcmToken: String
+    ) = repository.registerGoogle(firstname, username, email, fcmToken)
 
     fun saveUser(token: String) = viewModelScope.launch {
         try {
@@ -39,5 +42,7 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-
+    suspend fun getFcmToken(): String {
+        return Firebase.messaging.token.await()
+    }
 }

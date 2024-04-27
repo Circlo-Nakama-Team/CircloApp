@@ -46,9 +46,15 @@ android {
 }
 
 dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.android.gms:play-services-auth:21.1.0")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("androidx.credentials:credentials:1.3.0-alpha03")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0-alpha03")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     val lifecycle_version = "2.5.0"
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -99,7 +105,6 @@ dependencies {
 
     // Shimmer loading
     implementation ("com.facebook.shimmer:shimmer:0.2.0@aar")
-
     implementation ("com.github.jrvansuita:PickImage:3.0.2")
 }
 kapt {

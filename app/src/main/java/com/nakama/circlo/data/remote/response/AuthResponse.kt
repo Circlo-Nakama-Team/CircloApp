@@ -22,6 +22,6 @@ data class Data(
 	@field:SerializedName("credential")
 	val credential: String? = null,
 
-	@field:SerializedName("refreshToken")
+	@field:SerializedName("refresh_token")
 	val refreshToken: String? = null,
 )
