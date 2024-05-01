@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.nakama.circlo.data.pref.DataStoreManager
 import com.nakama.circlo.data.remote.retrofit.ApiService
-import com.nakama.circlo.util.dataStore
+import com.nakama.circlo.utils.dataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,7 +41,7 @@ object AppModule {
     @Provides
     fun provideApiService(client: OkHttpClient): ApiService {
         return Retrofit.Builder()
-            .baseUrl("https://1e67-125-167-153-27.ngrok-free.app/")
+            .baseUrl("https://backend-circlo-sxilj6bmva-uc.a.run.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

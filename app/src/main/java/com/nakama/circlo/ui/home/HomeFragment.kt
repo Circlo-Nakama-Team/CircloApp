@@ -18,12 +18,12 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentHomeBinding
-import com.nakama.circlo.util.confirmDialog
-import com.nakama.circlo.util.glide
-import com.nakama.circlo.util.hide
-import com.nakama.circlo.util.show
-import com.nakama.circlo.util.showBottomNavView
-import com.nakama.circlo.util.toast
+import com.nakama.circlo.utils.confirmDialog
+import com.nakama.circlo.utils.glide
+import com.nakama.circlo.utils.hide
+import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showBottomNavView
+import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -69,6 +69,9 @@ class HomeFragment : Fragment() {
                 tvWelcome.show()
                 ivProfile.show()
                 btnNotif.show()
+                val param = icPoint.layoutParams as ViewGroup.MarginLayoutParams
+                param.setMargins(36, 120, 0,0)
+                icPoint.layoutParams = param
             }
             getDetailProfile("Bearer $token")
             setupActionUser()
@@ -84,6 +87,9 @@ class HomeFragment : Fragment() {
             tvWelcome.hide()
             ivProfile.hide()
             btnNotif.hide()
+            val param = icPoint.layoutParams as ViewGroup.MarginLayoutParams
+            param.setMargins(36, 200, 0,0)
+            icPoint.layoutParams = param
         }
         setupActionGuest()
     }

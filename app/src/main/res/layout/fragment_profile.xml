@@ -1,357 +1,377 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/_48sdp"
     tools:context=".ui.profile.ProfileFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_appbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            android:textSize="@dimen/_16sdp"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="@color/inverseSurface"
-            android:paddingVertical="@dimen/_8sdp"
-            android:layout_gravity="center"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:paddingHorizontal="@dimen/_16sdp"
-        app:cardBackgroundColor="@color/greyThin"
-        android:layout_marginHorizontal="@dimen/_16sdp"
-        app:layout_constraintTop_toBottomOf="@id/cv_appbar"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_gravity="center"/>
-
-        <LinearLayout
-            android:id="@+id/view_must_login"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tv_title_must_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:text="Profile"
+                android:textSize="@dimen/_16sdp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Register or Login Now"
                 android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_12ssp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login now"
-                android:textColor="@color/white"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:backgroundTint="@color/greenLight"
+                android:paddingVertical="@dimen/_8sdp"
                 android:layout_gravity="center"/>
 
-            <TextView
-                android:id="@+id/tv_campaign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/roboto"
-                android:text="Let's join us to save the earth"
-                android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_12ssp" />
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <LinearLayout
-            android:id="@+id/view_already_login"
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            android:paddingVertical="@dimen/_16sdp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ivProfil"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:civ_border_color="@color/greenLight"
-                android:layout_gravity="center" />
-
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_profile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_14ssp" />
+                android:layout_marginTop="@dimen/_16sdp"
+                android:paddingHorizontal="@dimen/_16sdp"
+                app:cardBackgroundColor="@color/greyThin"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_coin"/>
-                <TextView
-                    android:id="@+id/tvPoint"
+                <ProgressBar
+                    android:id="@+id/progressBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_4sdp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text=""
+                    android:visibility="gone"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
+                    android:id="@+id/view_must_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_title_must_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Register or Login Now"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Login now"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:backgroundTint="@color/greenLight"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tv_campaign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Let's join us to save the earth"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_12ssp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/view_already_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    android:paddingVertical="@dimen/_16sdp"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfil"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:civ_border_color="@color/greenLight"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_coin"/>
+                        <TextView
+                            android:id="@+id/tvPoint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text=""
+                            android:textColor="@color/inverseSurface"
+                            android:textSize="@dimen/_8sdp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_profile"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/change_profile_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_12sdp">
+
+                    <ImageView
+                        android:id="@+id/ic_change_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_pencil"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/_16sdp"/>
+
+                    <TextView
+                        android:id="@+id/tv_change_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Ubah Profile"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_alignTop="@id/ic_change_profile"
+                        android:layout_toEndOf="@id/ic_change_profile"/>
+
+                    <ImageView
+                        android:id="@+id/ic_arrow_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_right"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Tentang"
+                    android:paddingStart="@dimen/_16sdp"
                     android:textColor="@color/inverseSurface"
-                    android:textSize="@dimen/_8sdp" />
+                    android:textSize="@dimen/_14ssp"
+                    android:background="@color/greyThin"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:layout_alignTop="@id/ic_change_profile"
+                    android:layout_toEndOf="@id/ic_change_profile"/>
+
+                <RelativeLayout
+                    android:id="@+id/change_panduan_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_12sdp">
+
+                    <ImageView
+                        android:id="@+id/ic_panduan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_info"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/_16sdp"/>
+
+                    <TextView
+                        android:id="@+id/tv_panduan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Panduan"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_alignTop="@id/ic_panduan"
+                        android:layout_toEndOf="@id/ic_panduan"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_right"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/change_terms_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_12sdp">
+
+                    <ImageView
+                        android:id="@+id/ic_terms_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_pencil"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/_16sdp"/>
+
+                    <TextView
+                        android:id="@+id/tv_terms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Syarat dan Ketentuan"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_alignTop="@id/ic_terms_profile"
+                        android:layout_toEndOf="@id/ic_terms_profile"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_right"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_others"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Lainnya"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:textColor="@color/inverseSurface"
+                    android:textSize="@dimen/_14ssp"
+                    android:background="@color/greyThin"
+                    android:paddingVertical="@dimen/_8sdp"/>
+
+                <RelativeLayout
+                    android:id="@+id/version_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_12sdp">
+
+                    <ImageView
+                        android:id="@+id/ic_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_mobile"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/_16sdp"/>
+
+                    <TextView
+                        android:id="@+id/tv_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="App version"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_alignTop="@id/ic_version"
+                        android:layout_toEndOf="@id/ic_version"/>
+
+                    <TextView
+                        android:id="@+id/tv_version_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="1.0.0"
+                        android:layout_marginEnd="@dimen/_16sdp"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_alignTop="@id/ic_version"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/btnLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_12sdp">
+
+                    <ImageView
+                        android:id="@+id/ic_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_logout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/_16sdp"/>
+
+                    <TextView
+                        android:id="@+id/tv_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Logout"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_alignTop="@id/ic_logout"
+                        android:layout_toEndOf="@id/ic_logout"/>
+
+                </RelativeLayout>
             </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_profile"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/change_profile_action"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:paddingVertical="@dimen/_12sdp">
-
-            <ImageView
-                android:id="@+id/ic_change_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_pencil"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/_16sdp"/>
-
-            <TextView
-                android:id="@+id/tv_change_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:fontFamily="@font/roboto"
-                android:text="Ubah Profile"
-                android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_14ssp"
-                android:layout_alignTop="@id/ic_change_profile"
-                android:layout_toEndOf="@id/ic_change_profile"/>
-
-            <ImageView
-                android:id="@+id/ic_arrow_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_right"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="Tentang"
-            android:paddingStart="@dimen/_16sdp"
-            android:textColor="@color/inverseSurface"
-            android:textSize="@dimen/_14ssp"
-            android:background="@color/greyThin"
-            android:paddingVertical="@dimen/_8sdp"
-            android:layout_alignTop="@id/ic_change_profile"
-            android:layout_toEndOf="@id/ic_change_profile"/>
-
-        <RelativeLayout
-            android:id="@+id/change_panduan_action"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:paddingVertical="@dimen/_12sdp">
-
-            <ImageView
-                android:id="@+id/ic_panduan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_info"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/_16sdp"/>
-
-            <TextView
-                android:id="@+id/tv_panduan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:fontFamily="@font/roboto"
-                android:text="Panduan"
-                android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_14ssp"
-                android:layout_alignTop="@id/ic_panduan"
-                android:layout_toEndOf="@id/ic_panduan"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_right"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/change_terms_action"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:paddingHorizontal="@dimen/_8sdp"
-            android:paddingVertical="@dimen/_12sdp">
-
-            <ImageView
-                android:id="@+id/ic_terms_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_pencil"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/_16sdp"/>
-
-            <TextView
-                android:id="@+id/tv_terms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:fontFamily="@font/roboto"
-                android:text="Syarat dan Ketentuan"
-                android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_14ssp"
-                android:layout_alignTop="@id/ic_terms_profile"
-                android:layout_toEndOf="@id/ic_terms_profile"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_right"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_others"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="Lainnya"
-            android:paddingStart="@dimen/_16sdp"
-            android:textColor="@color/inverseSurface"
-            android:textSize="@dimen/_14ssp"
-            android:background="@color/greyThin"
-            android:paddingVertical="@dimen/_8sdp"/>
-
-        <RelativeLayout
-            android:id="@+id/version_action"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:paddingHorizontal="@dimen/_8sdp"
-            android:paddingVertical="@dimen/_12sdp">
-
-            <ImageView
-                android:id="@+id/ic_version"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_mobile"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/_16sdp"/>
-
-            <TextView
-                android:id="@+id/tv_version"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:fontFamily="@font/roboto"
-                android:text="App version"
-                android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_14ssp"
-                android:layout_alignTop="@id/ic_version"
-                android:layout_toEndOf="@id/ic_version"/>
-
-            <TextView
-                android:id="@+id/tv_version_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:fontFamily="@font/roboto"
-                android:text="1.0.0"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_14ssp"
-                android:layout_alignTop="@id/ic_version"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:paddingHorizontal="@dimen/_8sdp"
-            android:paddingVertical="@dimen/_12sdp">
-
-            <ImageView
-                android:id="@+id/ic_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_logout"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/_16sdp"/>
-
-            <TextView
-                android:id="@+id/tv_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:fontFamily="@font/roboto"
-                android:text="Logout"
-                android:textColor="@color/inverseSurface"
-                android:textSize="@dimen/_14ssp"
-                android:layout_alignTop="@id/ic_logout"
-                android:layout_toEndOf="@id/ic_logout"/>
-
-        </RelativeLayout>
-    </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

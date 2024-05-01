@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nakama.circlo.data.remote.response.TrashIdeasItem
 import com.nakama.circlo.databinding.ItemScanResultBinding
-import com.nakama.circlo.util.glide
+import com.nakama.circlo.utils.glide
 
 class TrashResultAdapter: RecyclerView.Adapter<TrashResultAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: ItemScanResultBinding): RecyclerView.ViewHolder(binding.root)

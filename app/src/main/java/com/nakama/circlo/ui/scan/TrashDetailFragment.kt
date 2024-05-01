@@ -19,8 +19,8 @@ import com.nakama.circlo.adapter.TrashDetailPager
 import com.nakama.circlo.data.remote.response.DataTrash
 import com.nakama.circlo.data.remote.response.TrashIdeasItem
 import com.nakama.circlo.databinding.FragmentTrashDetailBinding
-import com.nakama.circlo.util.hide
-import com.nakama.circlo.util.show
+import com.nakama.circlo.utils.hide
+import com.nakama.circlo.utils.show
 
 class TrashDetailFragment : Fragment() {
 

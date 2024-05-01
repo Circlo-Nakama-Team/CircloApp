@@ -1,21 +1,16 @@
 package com.nakama.circlo.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.nakama.circlo.data.remote.response.IdeasItem
 import com.nakama.circlo.data.remote.response.PostsItem
-import com.nakama.circlo.data.remote.response.TrashIdeasItem
-import com.nakama.circlo.databinding.ItemListProductIdeaBinding
 import com.nakama.circlo.databinding.ItemPostBinding
-import com.nakama.circlo.databinding.ItemScanResultBinding
-import com.nakama.circlo.util.convertDate
-import com.nakama.circlo.util.glide
-import com.nakama.circlo.util.hide
+import com.nakama.circlo.utils.convertDate
+import com.nakama.circlo.utils.glide
+import com.nakama.circlo.utils.hide
 
 class PostItemAdapter: RecyclerView.Adapter<PostItemAdapter.ViewHolder>() {
 

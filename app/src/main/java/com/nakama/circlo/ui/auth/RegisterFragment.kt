@@ -10,9 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentRegisterBinding
-import com.nakama.circlo.util.confirmDialog
-import com.nakama.circlo.util.hideBottomNavView
-import com.nakama.circlo.util.toast
+import com.nakama.circlo.utils.confirmDialog
+import com.nakama.circlo.utils.hideBottomNavView
+import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

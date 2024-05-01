@@ -1,4 +1,4 @@
-package com.nakama.circlo.util.customview
+package com.nakama.circlo.utils.customview
 
 import android.content.Context
 import android.graphics.Canvas

@@ -1,560 +1,564 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/_48sdp"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/section_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_section_top"
-        android:paddingTop="@dimen/_16sdp"
-        android:paddingBottom="@dimen/_24sdp"
-        android:paddingHorizontal="@dimen/_16sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/view_must_login"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:background="@drawable/bg_section_top"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_24sdp"
+            android:paddingHorizontal="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1">
+
+            <LinearLayout
+                android:id="@+id/view_must_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_title_must_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="You must login first"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login now"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/yellow"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                android:layout_centerHorizontal="true"
+                tools:src="@color/onSurfaceVariant"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/tv_title_must_login"
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="@font/roboto_medium"
-                android:text="You must login first"
-                android:layout_weight="1"
+                android:text="Halo, Nakama!"
+                android:visibility="visible"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp" />
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="@dimen/_14ssp"
+                android:layout_marginStart="@dimen/_8sdp"
+                app:layout_constraintBottom_toTopOf="@id/tv_welcome"
+                app:layout_constraintStart_toEndOf="@id/ivProfile"
+                app:layout_constraintTop_toTopOf="@id/ivProfile"/>
+
+            <TextView
+                android:id="@+id/tv_welcome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="Sudahkah kamu daur ulang sampahmu hari ini?"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintBottom_toBottomOf="@id/ivProfile"
+                app:layout_constraintEnd_toStartOf="@+id/btn_notif"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+            <ImageButton
+                android:id="@+id/btn_notif"
+                android:layout_width="@dimen/_48sdp"
+                android:layout_height="@dimen/_48sdp"
+                android:src="@drawable/ic_notification"
+                android:visibility="visible"
+                android:backgroundTint="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ivProfile"
+                android:contentDescription="@string/button_notification" />
+
+            <ImageView
+                android:id="@+id/ic_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_coin"
+                app:layout_constraintTop_toBottomOf="@id/ivProfile"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_circlo_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Circlo Point"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="@dimen/_14ssp"
+                android:layout_marginStart="@dimen/_8sdp"
+                app:layout_constraintStart_toEndOf="@id/ic_point"
+                app:layout_constraintTop_toTopOf="@id/ic_point"
+                app:layout_constraintBottom_toBottomOf="@id/ic_point"/>
+
+            <TextView
+                android:id="@+id/tv_total_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="@dimen/_32ssp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                app:layout_constraintStart_toStartOf="@id/ic_point"
+                app:layout_constraintTop_toBottomOf="@id/tv_circlo_point"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_topUp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login now"
+                android:layout_height="@dimen/_40sdp"
+                android:minWidth="@dimen/_80sdp"
+                android:text="Top Up"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                app:icon="@drawable/ic_add_btn"
+                app:iconTintMode="multiply"
+                app:iconGravity="start"
+                android:textAllCaps="false"
+                android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/yellow"
-                android:layout_gravity="center"/>
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white"
+                app:cornerRadius="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_circlo_point"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_redeem"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_40sdp"
+                android:text="Redeem"
+                android:minWidth="@dimen/_80sdp"
+                android:max="@dimen/_80sdp"
+                android:paddingHorizontal="@dimen/_12sdp"
+                app:icon="@drawable/ic_redeem"
+                app:iconTintMode="multiply"
+                app:iconGravity="start"
+                android:textAllCaps="false"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white"
+                app:cornerRadius="100dp"
+                app:layout_constraintEnd_toEndOf="@id/btn_topUp"
+                app:layout_constraintTop_toBottomOf="@id/btn_topUp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Main Features -->
+        <LinearLayout
+            android:id="@+id/section_main_features"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/section_top">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_pickup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                app:cardBackgroundColor="@color/yellowLight"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_12sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginVertical="@dimen/_16sdp">
+
+                    <ImageView
+                        android:id="@+id/ic_pickUp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_pickup"
+                        android:layout_alignBottom="@id/tv_pickup_desc"
+                        android:src="@drawable/ic_pickup"/>
+
+                    <TextView
+                        android:id="@+id/tv_pickup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pickup"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_toEndOf="@id/ic_pickUp"/>
+
+                    <TextView
+                        android:id="@+id/tv_pickup_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Mitra circlo akan jemput sampahmu"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_alignStart="@id/tv_pickup"
+                        android:layout_below="@id/tv_pickup"/>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_dropoff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                app:cardBackgroundColor="@color/youngGreen"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_12sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginVertical="@dimen/_16sdp">
+
+                    <ImageView
+                        android:id="@+id/ic_dropOff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_dropoff"
+                        android:layout_alignBottom="@id/tv_dropoff_desc"
+                        android:src="@drawable/ic_dropoff"/>
+
+                    <TextView
+                        android:id="@+id/tv_dropoff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Drop Off"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_toEndOf="@id/ic_dropOff"/>
+
+                    <TextView
+                        android:id="@+id/tv_dropoff_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Antarkan langsung sampah mu"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_alignStart="@id/tv_dropoff"
+                        android:layout_below="@id/tv_dropoff"/>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_explore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                app:cardBackgroundColor="@color/youngBlue"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_12sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginVertical="@dimen/_16sdp">
+
+                    <ImageView
+                        android:id="@+id/ic_explore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_explore"
+                        android:layout_alignBottom="@id/tv_explore_desc"
+                        android:src="@drawable/ic_explore"/>
+
+                    <TextView
+                        android:id="@+id/tv_explore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Explore"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_toEndOf="@id/ic_explore"/>
+
+                    <TextView
+                        android:id="@+id/tv_explore_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Cari inspirasi untuk daur ulang sampah"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_alignStart="@id/tv_explore"
+                        android:layout_below="@id/tv_explore"/>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivProfile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:visibility="visible"
-            android:layout_centerHorizontal="true"
-            tools:src="@color/onSurfaceVariant"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
+
+        <!-- Introduction Banner -->
+        <HorizontalScrollView
+            android:id="@+id/section_introduction_banner"
+            android:contentDescription="@string/introduction_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollIndicators="none"
+            android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Halo, Nakama!"
-            android:visibility="visible"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="@dimen/_14ssp"
-            android:layout_marginStart="@dimen/_8sdp"
-            app:layout_constraintBottom_toTopOf="@id/tv_welcome"
-            app:layout_constraintStart_toEndOf="@id/ivProfile"
-            app:layout_constraintTop_toTopOf="@id/ivProfile"/>
-
-        <TextView
-            android:id="@+id/tv_welcome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="Sudahkah kamu daur ulang sampahmu hari ini?"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp"
-            android:visibility="visible"
             android:layout_marginTop="@dimen/_8sdp"
-            app:layout_constraintBottom_toBottomOf="@id/ivProfile"
-            app:layout_constraintEnd_toStartOf="@+id/btn_notif"
-            app:layout_constraintStart_toStartOf="@id/tv_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+            app:layout_constraintTop_toBottomOf="@id/section_main_features">
 
-        <ImageButton
-            android:id="@+id/btn_notif"
-            android:layout_width="@dimen/_48sdp"
-            android:layout_height="@dimen/_48sdp"
-            android:src="@drawable/ic_notification"
-            android:visibility="visible"
-            android:backgroundTint="@android:color/transparent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ivProfile"
-            android:contentDescription="@string/button_notification" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ic_point"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:src="@drawable/slide_1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:src="@drawable/slide_2" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:src="@drawable/slide_3" />
+            </LinearLayout>
+
+
+        </HorizontalScrollView>
+
+
+        <!-- Article -->
+        <TextView
+            android:id="@+id/tv_article"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_coin"
-            app:layout_constraintTop_toBottomOf="@id/ivProfile"
-            android:layout_marginTop="@dimen/_36sdp"
+            android:text="Artikel Terbaru"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="@dimen/_16ssp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="@dimen/_24sdp"/>
+            app:layout_constraintTop_toBottomOf="@id/section_introduction_banner"/>
 
         <TextView
-            android:id="@+id/tv_circlo_point"
+            android:id="@+id/tv_see_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Circlo Point"
-            android:textColor="@color/white"
+            android:text="See all"
+            android:textColor="@color/greenLight"
             android:fontFamily="@font/roboto_medium"
-            android:textSize="@dimen/_14ssp"
-            android:layout_marginStart="@dimen/_8sdp"
-            app:layout_constraintStart_toEndOf="@id/ic_point"
-            app:layout_constraintTop_toTopOf="@id/ic_point"
-            app:layout_constraintBottom_toBottomOf="@id/ic_point"/>
-
-        <TextView
-            android:id="@+id/tv_total_point"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="@dimen/_32ssp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            app:layout_constraintStart_toStartOf="@id/ic_point"
-            app:layout_constraintTop_toBottomOf="@id/tv_circlo_point"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_topUp"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_40sdp"
-            android:minWidth="@dimen/_80sdp"
-            android:text="Top Up"
+            android:textSize="@dimen/_16ssp"
             android:layout_marginEnd="@dimen/_16sdp"
-            android:paddingHorizontal="@dimen/_15sdp"
-            app:icon="@drawable/ic_add_btn"
-            app:iconTintMode="multiply"
-            app:iconGravity="start"
-            android:textAllCaps="false"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/white"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/white"
-            app:cornerRadius="100dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_circlo_point"/>
+            app:layout_constraintTop_toTopOf="@id/tv_article"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_redeem"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_40sdp"
-            android:text="Redeem"
-            android:minWidth="@dimen/_80sdp"
-            android:max="@dimen/_80sdp"
-            android:paddingHorizontal="@dimen/_12sdp"
-            app:icon="@drawable/ic_redeem"
-            app:iconTintMode="multiply"
-            app:iconGravity="start"
-            android:textAllCaps="false"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/white"
-            android:layout_marginTop="@dimen/_4sdp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/white"
-            app:cornerRadius="100dp"
-            app:layout_constraintEnd_toEndOf="@id/btn_topUp"
-            app:layout_constraintTop_toBottomOf="@id/btn_topUp"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Main Features -->
-    <LinearLayout
-        android:id="@+id/section_main_features"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/section_top">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_pickup"
+        <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/rv_menu_recommendation"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginHorizontal="@dimen/_16sdp"
-            app:cardBackgroundColor="@color/yellowLight"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="@dimen/_12sdp">
+            tools:itemCount="3"
+            tools:listitem="@layout/item_article"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_article"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/_16sdp"
-                android:layout_marginVertical="@dimen/_16sdp">
-
-                <ImageView
-                    android:id="@+id/ic_pickUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_pickup"
-                    android:layout_alignBottom="@id/tv_pickup_desc"
-                    android:src="@drawable/ic_pickup"/>
-
-                <TextView
-                    android:id="@+id/tv_pickup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pickup"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textSize="@dimen/_16ssp"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:layout_toEndOf="@id/ic_pickUp"/>
-
-                <TextView
-                    android:id="@+id/tv_pickup_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="Mitra circlo akan jemput sampahmu"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/_12ssp"
-                    android:layout_alignStart="@id/tv_pickup"
-                    android:layout_below="@id/tv_pickup"/>
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_dropoff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            app:cardBackgroundColor="@color/youngGreen"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="@dimen/_12sdp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/_16sdp"
-                android:layout_marginVertical="@dimen/_16sdp">
-
-                <ImageView
-                    android:id="@+id/ic_dropOff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_dropoff"
-                    android:layout_alignBottom="@id/tv_dropoff_desc"
-                    android:src="@drawable/ic_dropoff"/>
-
-                <TextView
-                    android:id="@+id/tv_dropoff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Drop Off"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textSize="@dimen/_16ssp"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:layout_toEndOf="@id/ic_dropOff"/>
-
-                <TextView
-                    android:id="@+id/tv_dropoff_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="Antarkan langsung sampah mu"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/_12ssp"
-                    android:layout_alignStart="@id/tv_dropoff"
-                    android:layout_below="@id/tv_dropoff"/>
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_explore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            app:cardBackgroundColor="@color/youngBlue"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="@dimen/_12sdp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/_16sdp"
-                android:layout_marginVertical="@dimen/_16sdp">
-
-                <ImageView
-                    android:id="@+id/ic_explore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_explore"
-                    android:layout_alignBottom="@id/tv_explore_desc"
-                    android:src="@drawable/ic_explore"/>
-
-                <TextView
-                    android:id="@+id/tv_explore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Explore"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textSize="@dimen/_16ssp"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:layout_toEndOf="@id/ic_explore"/>
-
-                <TextView
-                    android:id="@+id/tv_explore_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="Cari inspirasi untuk daur ulang sampah"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/_12ssp"
-                    android:layout_alignStart="@id/tv_explore"
-                    android:layout_below="@id/tv_explore"/>
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-
-    <!-- Introduction Banner -->
-    <HorizontalScrollView
-        android:id="@+id/section_introduction_banner"
-        android:contentDescription="@string/introduction_banner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollIndicators="none"
-        android:scrollbars="none"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/_8sdp"
-        app:layout_constraintTop_toBottomOf="@id/section_main_features">
-
+        <!-- Article -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_article">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:src="@drawable/slide_1" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_250sdp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="@dimen/_8sdp"
+                xmlns:tools="http://schemas.android.com/tools">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:src="@drawable/slide_2" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:src="@drawable/slide_3" />
+                    <ImageView
+                        android:id="@+id/iv_ideas"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_120sdp"
+                        android:src="@drawable/article_preview_1"
+                        android:scaleType="centerCrop" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_8sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cara menjadikan cangkang telur menjadi bahan kerajinan"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="@dimen/_16ssp"
+                            android:layout_toEndOf="@id/ic_pickUp"/>
+
+                        <TextView
+                            android:id="@+id/tv_subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Organic Waste"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:textColor="@color/greenLight"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/_14ssp"
+                            android:layout_toEndOf="@id/ic_pickUp"/>
+
+                        <TextView
+                            android:id="@+id/tv_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="Ternayata cangkang telur bisa menjadi bahan kerajinan yang menarik loh. Yuk kita simak cara membuatnya!"
+                            android:maxLines="2"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/roboto_light"
+                            android:textSize="@dimen/_14ssp"
+                            android:layout_toEndOf="@id/ic_pickUp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_250sdp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="@dimen/_8sdp"
+                xmlns:tools="http://schemas.android.com/tools">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_ideas2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_120sdp"
+                        android:src="@drawable/article_preview_2"
+                        android:scaleType="centerCrop" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_8sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_title2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:text="Lima Pemuda Pandawara Group Gerakkan Bersih Sampah di Pantai Cibutun Loji Sukabumi"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="@dimen/_16ssp"
+                            android:layout_toEndOf="@id/ic_pickUp"/>
+
+                        <TextView
+                            android:id="@+id/tv_subhead2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Waste Campaign"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:textColor="@color/greenLight"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/_14ssp"
+                            android:layout_toEndOf="@id/ic_pickUp"/>
+
+                        <TextView
+                            android:id="@+id/tv_desc2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="Lima pemuda laki-laki yang terdiri dari Gilang, Ikhsan, Rifqi, Rafly, dan Agung berteman sejak masih menempuh pendidikan SMA."
+                            android:maxLines="2"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/roboto_light"
+                            android:textSize="@dimen/_14ssp"
+                            android:layout_toEndOf="@id/ic_pickUp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    </HorizontalScrollView>
-
-
-    <!-- Article -->
-    <TextView
-        android:id="@+id/tv_article"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Artikel Terbaru"
-        android:textColor="@color/black"
-        android:fontFamily="@font/roboto_medium"
-        android:textSize="@dimen/_16ssp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/section_introduction_banner"/>
-
-    <TextView
-        android:id="@+id/tv_see_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="See all"
-        android:textColor="@color/greenLight"
-        android:fontFamily="@font/roboto_medium"
-        android:textSize="@dimen/_16ssp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_article"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:id="@+id/rv_menu_recommendation"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginHorizontal="@dimen/_16sdp"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_article"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_article"/>
-
-    <!-- Article -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="@dimen/_8sdp"
-        app:layout_constraintTop_toBottomOf="@id/tv_article">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="@dimen/_8sdp"
-            xmlns:tools="http://schemas.android.com/tools">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_ideas"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_120sdp"
-                    android:src="@drawable/article_preview_1"
-                    android:scaleType="centerCrop" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/_8sdp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cara menjadikan cangkang telur menjadi bahan kerajinan"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textSize="@dimen/_16ssp"
-                        android:layout_toEndOf="@id/ic_pickUp"/>
-
-                    <TextView
-                        android:id="@+id/tv_subhead"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Organic Waste"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:textColor="@color/greenLight"
-                        android:fontFamily="@font/roboto"
-                        android:textSize="@dimen/_14ssp"
-                        android:layout_toEndOf="@id/ic_pickUp"/>
-
-                    <TextView
-                        android:id="@+id/tv_desc"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:text="Ternayata cangkang telur bisa menjadi bahan kerajinan yang menarik loh. Yuk kita simak cara membuatnya!"
-                        android:maxLines="2"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_light"
-                        android:textSize="@dimen/_14ssp"
-                        android:layout_toEndOf="@id/ic_pickUp"/>
-                </LinearLayout>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="@dimen/_8sdp"
-            xmlns:tools="http://schemas.android.com/tools">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_ideas2"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_120sdp"
-                    android:src="@drawable/article_preview_2"
-                    android:scaleType="centerCrop" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/_8sdp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_title2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="2"
-                        android:text="Lima Pemuda Pandawara Group Gerakkan Bersih Sampah di Pantai Cibutun Loji Sukabumi"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textSize="@dimen/_16ssp"
-                        android:layout_toEndOf="@id/ic_pickUp"/>
-
-                    <TextView
-                        android:id="@+id/tv_subhead2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Waste Campaign"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:textColor="@color/greenLight"
-                        android:fontFamily="@font/roboto"
-                        android:textSize="@dimen/_14ssp"
-                        android:layout_toEndOf="@id/ic_pickUp"/>
-
-                    <TextView
-                        android:id="@+id/tv_desc2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:text="Lima pemuda laki-laki yang terdiri dari Gilang, Ikhsan, Rifqi, Rafly, dan Agung berteman sejak masih menempuh pendidikan SMA."
-                        android:maxLines="2"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_light"
-                        android:textSize="@dimen/_14ssp"
-                        android:layout_toEndOf="@id/ic_pickUp"/>
-                </LinearLayout>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

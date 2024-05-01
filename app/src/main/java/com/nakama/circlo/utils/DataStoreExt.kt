@@ -1,4 +1,4 @@
-package com.nakama.circlo.util
+package com.nakama.circlo.utils
 
 import android.content.Context
 import androidx.datastore.core.DataStore

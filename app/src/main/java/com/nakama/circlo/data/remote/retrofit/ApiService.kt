@@ -1,8 +1,10 @@
 package com.nakama.circlo.data.remote.retrofit
 
 import com.nakama.circlo.data.remote.response.AuthResponse
+import com.nakama.circlo.data.remote.response.CertainDonateResponse
 import com.nakama.circlo.data.remote.response.CommunityResponse
 import com.nakama.circlo.data.remote.response.DonateResponse
+import com.nakama.circlo.data.remote.response.ListDonateResponse
 import com.nakama.circlo.data.remote.response.ScanResponse
 import com.nakama.circlo.data.remote.response.UserResponse
 import okhttp3.MultipartBody
@@ -159,4 +161,15 @@ interface ApiService {
 
         ): DonateResponse
 
+    // Get Donate history
+    @GET("donate")
+    suspend fun getDonateHistories(
+        @Header("Authorization") token: String,
+    ): ListDonateResponse
+
+    @GET("donate/{donateId}")
+    suspend fun getDetailDonate(
+        @Header("Authorization") token: String,
+        @Path("donateId") donateId: String
+    ): CertainDonateResponse
 }

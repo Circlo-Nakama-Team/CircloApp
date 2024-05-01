@@ -12,10 +12,10 @@ import com.nakama.circlo.adapter.PostItemAdapter
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.data.remote.response.PostsItem
 import com.nakama.circlo.databinding.FragmentCommunityBinding
-import com.nakama.circlo.util.hide
-import com.nakama.circlo.util.show
-import com.nakama.circlo.util.showBottomNavView
-import com.nakama.circlo.util.toast
+import com.nakama.circlo.utils.hide
+import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showBottomNavView
+import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -82,6 +82,7 @@ class CommunityFragment : Fragment() {
                     binding.progressBar.show()
                 }
                 is Result.Success -> {
+                    binding.progressBar.hide()
                     setUpRvPost(result.data.data?.posts!!)
                 }
                 is Result.Error -> {

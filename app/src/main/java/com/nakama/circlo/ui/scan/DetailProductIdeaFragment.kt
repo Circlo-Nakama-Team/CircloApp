@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.nakama.circlo.R
 import com.nakama.circlo.data.remote.response.IdeasItem
 import com.nakama.circlo.databinding.FragmentDetailProductIdeaBinding
-import com.nakama.circlo.util.glide
-import com.nakama.circlo.util.hideBottomNavView
+import com.nakama.circlo.utils.glide
+import com.nakama.circlo.utils.hideBottomNavView
 
 class DetailProductIdeaFragment : Fragment() {
 

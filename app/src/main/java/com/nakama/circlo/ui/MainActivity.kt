@@ -9,8 +9,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.nakama.circlo.R
 import com.nakama.circlo.databinding.ActivityMainBinding
-import com.nakama.circlo.util.confirmDialog
-import com.nakama.circlo.util.toast
+import com.nakama.circlo.utils.confirmDialog
+import com.nakama.circlo.utils.singleton.DataSingleton
+import com.nakama.circlo.utils.toast
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,9 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<SharedViewModel>()
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -41,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun validateUserToken() {
         viewModel.getUser().observe(this) { token ->
+            DataSingleton.getInstance().userToken = token
             setupAction(token)
         }
     }

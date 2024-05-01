@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nakama.circlo.data.remote.response.IdeasItem
-import com.nakama.circlo.data.remote.response.TrashIdeasItem
 import com.nakama.circlo.databinding.ItemListProductIdeaBinding
-import com.nakama.circlo.databinding.ItemScanResultBinding
-import com.nakama.circlo.util.glide
+import com.nakama.circlo.utils.glide
 
 class IdeasItemAdapter: RecyclerView.Adapter<IdeasItemAdapter.ViewHolder>() {
 

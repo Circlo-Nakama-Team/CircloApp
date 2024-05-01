@@ -1,4 +1,4 @@
-package com.nakama.circlo.util
+package com.nakama.circlo.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -41,6 +41,7 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nakama.circlo.BuildConfig
 import com.nakama.circlo.ui.MainActivity
@@ -64,7 +65,7 @@ fun View.show() {
 }
 
 fun View.hide() {
-    visibility = View.INVISIBLE
+    visibility = View.GONE
 }
 
 fun Activity.toast(msg: String) {
@@ -206,6 +207,19 @@ fun convertDate(inputDate: String): String {
     return formatter.format(date!!)
 }
 
+fun convertTime(inputTime: String): String {
+    val inputFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+    val date = inputFormat.parse(inputTime)
+
+    return outputFormat.format(date!!)
+}
+
+fun checkCategories() {
+
+}
+
 fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int, context: Context): BitmapDescriptor {
     val vectorDrawable = ResourcesCompat.getDrawable(context.resources , id, null)
     if (vectorDrawable == null) {
@@ -226,18 +240,22 @@ fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int, context: Context)
 
 fun Fragment.hideBottomNavView() {
     val appBar: BottomAppBar = (activity as MainActivity).findViewById(R.id.menuBottom)
+    val bottomNavView: BottomNavigationView = (activity as MainActivity).findViewById(R.id.bottomNavigationView)
     val fab: FloatingActionButton = (activity as MainActivity).findViewById(R.id.btn_scan)
 
     appBar.visibility = View.GONE
     fab.visibility = View.GONE
+    bottomNavView.visibility = View.GONE
 }
 
 fun Fragment.showBottomNavView() {
     val appBar: BottomAppBar = (activity as MainActivity).findViewById(R.id.menuBottom)
+    val bottomNavView: BottomNavigationView = (activity as MainActivity).findViewById(R.id.bottomNavigationView)
     val fab: FloatingActionButton = (activity as MainActivity).findViewById(R.id.btn_scan)
 
     appBar.visibility = View.VISIBLE
     fab.visibility = View.VISIBLE
+    bottomNavView.visibility = View.VISIBLE
 }
 
 fun getImageUri(context: Context): Uri {

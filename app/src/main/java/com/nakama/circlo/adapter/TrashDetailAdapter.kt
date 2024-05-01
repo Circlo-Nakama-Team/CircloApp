@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nakama.circlo.data.remote.response.TrashIdeasItem
 import com.nakama.circlo.databinding.ItemTrashPagerBinding
-import com.nakama.circlo.util.glide
+import com.nakama.circlo.utils.glide
 
 class TrashDetailPager: RecyclerView.Adapter<TrashDetailPager.ViewHolder>() {
 

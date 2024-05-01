@@ -26,4 +26,9 @@
     <string name="register">Register</string>
     <string name="add_description_here">Add description here...</string>
     <string name="add_post">Add Post</string>
+    <string name="product_idea">Product Idea</string>
+    <string name="yeayy_donasimu_berhasil">Yeayy, Donasimu berhasil!</string>
+    <string name="donasimu_sedang_diproses_oleh_tim_kami">Donasimu sedang diproses oleh tim kami</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="success_donate">Success Donate</string>
 </resources>

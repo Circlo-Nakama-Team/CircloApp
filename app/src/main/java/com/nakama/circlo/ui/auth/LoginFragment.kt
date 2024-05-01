@@ -24,9 +24,9 @@ import com.nakama.circlo.ui.MainActivity
 import com.nakama.circlo.R
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentLoginBinding
-import com.nakama.circlo.util.Constants.SERVER_CLIENT_ID
-import com.nakama.circlo.util.hideBottomNavView
-import com.nakama.circlo.util.toast
+import com.nakama.circlo.utils.Constants.SERVER_CLIENT_ID
+import com.nakama.circlo.utils.hideBottomNavView
+import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -144,8 +144,9 @@ class LoginFragment : Fragment() {
                     if (it.error.equals("HTTP 400 ")) {
                         navigateToHome(userToken)
                         Log.d("User Token already", fcmToken)
+                    } else {
+                        toast(it.error)
                     }
-                    toast(it.error)
                 }
             }
         }
@@ -201,8 +202,8 @@ class LoginFragment : Fragment() {
                             .createFrom(credential.data)
 
                         userToken = googleIdTokenCredential.idToken
-                        firebaseAuthGoogle(googleIdTokenCredential.idToken)
                         Log.d(TAG, googleIdTokenCredential.idToken)
+                        firebaseAuthGoogle(googleIdTokenCredential.idToken)
                     } catch (e: GoogleIdTokenParsingException) {
                         toast("Received an invalid google id token response")
                         Log.e(TAG, "Received an invalid google id token response", e)
@@ -234,7 +235,7 @@ class LoginFragment : Fragment() {
                 )
             }
             .addOnFailureListener {
-                toast(it.localizedMessage)
+                toast(it.localizedMessage!!)
             }
     }
 }

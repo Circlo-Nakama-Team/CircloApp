@@ -5,8 +5,10 @@ import androidx.lifecycle.liveData
 import com.google.gson.Gson
 import com.nakama.circlo.data.pref.DataStoreManager
 import com.nakama.circlo.data.remote.response.AuthResponse
+import com.nakama.circlo.data.remote.response.CertainDonateResponse
 import com.nakama.circlo.data.remote.response.CommunityResponse
 import com.nakama.circlo.data.remote.response.DonateResponse
+import com.nakama.circlo.data.remote.response.ListDonateResponse
 import com.nakama.circlo.data.remote.response.ScanResponse
 import com.nakama.circlo.data.remote.response.UserResponse
 import com.nakama.circlo.data.remote.retrofit.ApiService
@@ -183,6 +185,36 @@ class UserRepository @Inject constructor(
             } else {
                 emit(Result.Error(response.message.toString()))
             }
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, DonateResponse::class.java)
+            val errorMessage = errorBody.status
+            emit(Result.Error(errorMessage.toString()))
+        }
+    }
+
+    fun getListDonate(token: String) : LiveData<Result<ListDonateResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getDonateHistories(token)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, DonateResponse::class.java)
+            val errorMessage = errorBody.status
+            emit(Result.Error(errorMessage.toString()))
+        }
+    }
+
+    fun getDetailDonate(token: String, donateId: String) : LiveData<Result<CertainDonateResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getDetailDonate(token, donateId)
+            emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
         } catch (e: HttpException) {

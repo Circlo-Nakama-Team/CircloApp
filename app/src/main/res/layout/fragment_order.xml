@@ -1,28 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/_48sdp"
     tools:context=".ui.order.OrderFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_appbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Donate History"
+                android:textSize="@dimen/_16sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/inverseSurface"
+                android:paddingVertical="@dimen/_8sdp"
+                android:layout_gravity="center"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Donate History"
-            android:textSize="@dimen/_16sdp"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="@color/inverseSurface"
-            android:paddingVertical="@dimen/_12sdp"
-            android:layout_gravity="center"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </androidx.cardview.widget.CardView>
+            <androidx.recyclerview.widget.RecyclerView
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/rv_oder_history"
+                android:layout_width="match_parent"
+                android:visibility="visible"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_16sdp"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_order_history"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/iv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/il_empty_state"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

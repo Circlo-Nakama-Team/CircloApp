@@ -1,4 +1,4 @@
-package com.nakama.circlo.util
+package com.nakama.circlo.utils
 
 object Constants {
 

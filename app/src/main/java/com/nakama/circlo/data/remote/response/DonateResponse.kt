@@ -13,15 +13,36 @@ data class DonateResponse(
 	val status: String? = null
 )
 
-data class ListDonateResponse(
+data class CertainDonateResponse(
 	@field:SerializedName("data")
-	val data: List<DonateData>? = null,
+	val data: DonateItem? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
 
 	@field:SerializedName("status")
 	val status: String? = null
+)
+
+data class DonateItem(
+	@field:SerializedName("donateData")
+	val donateItem: DonateData? = null,
+)
+
+data class ListDonateResponse(
+	@field:SerializedName("data")
+	val data: DonateDatas? = null,
+
+	@field:SerializedName("message")
+	val message: String? = null,
+
+	@field:SerializedName("status")
+	val status: String? = null
+)
+
+data class DonateDatas(
+	@field:SerializedName("donateData")
+	val donateDatas: List<DonateData>? = null
 )
 
 data class NewDonateResponse(
@@ -70,7 +91,7 @@ data class DonateData(
 	val donateId: String? = null,
 
 	@field:SerializedName("image")
-	val image: List<String?>? = null,
+	val image: List<String>? = null,
 
 	@field:SerializedName("donateAddressDetail")
 	val donateAddressDetail: String? = null,

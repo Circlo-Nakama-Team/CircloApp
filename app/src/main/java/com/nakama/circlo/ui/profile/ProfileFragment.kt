@@ -13,11 +13,11 @@ import com.nakama.circlo.ui.MainActivity
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentProfileBinding
 import com.nakama.circlo.ui.profile.viewmodel.ProfileViewModel
-import com.nakama.circlo.util.confirmDialog
-import com.nakama.circlo.util.glide
-import com.nakama.circlo.util.hide
-import com.nakama.circlo.util.show
-import com.nakama.circlo.util.showBottomNavView
+import com.nakama.circlo.utils.confirmDialog
+import com.nakama.circlo.utils.glide
+import com.nakama.circlo.utils.hide
+import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showBottomNavView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
