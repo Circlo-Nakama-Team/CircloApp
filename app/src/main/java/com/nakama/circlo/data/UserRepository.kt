@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.google.gson.Gson
 import com.nakama.circlo.data.pref.DataStoreManager
+import com.nakama.circlo.data.remote.response.AddressResponse
 import com.nakama.circlo.data.remote.response.AuthResponse
 import com.nakama.circlo.data.remote.response.CertainDonateResponse
 import com.nakama.circlo.data.remote.response.CommunityResponse
@@ -46,12 +47,11 @@ class UserRepository @Inject constructor(
         lastname: String,
         username: String,
         email: String,
-        password: String,
-        fcmToken: String
+        password: String
     ): LiveData<Result<AuthResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.register(firstname, lastname, username, email, password, fcmToken)
+            val response = apiService.register(firstname, lastname, username, email, password)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
@@ -87,6 +87,57 @@ class UserRepository @Inject constructor(
         emit(Result.Loading)
         try {
             val response = apiService.getAuthUser(token)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getDetailAddress(token: String, addressId: String): LiveData<Result<AddressResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getDetailAddress(token, addressId)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun updateMainAddress(token: String, addressId: String): LiveData<Result<UserResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.updateMainAddress(token, addressId)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun editAddress(
+        token: String,
+        address: String,
+        addressDetail: String,
+        addressTitle: String,
+        addressId: String
+    ): LiveData<Result<UserResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.editAddress(token, address, addressDetail, addressTitle, addressId)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun addAddress(
+        token: String,
+        address: String,
+        addressDetail: String,
+        addressTitle: String
+    ): LiveData<Result<UserResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.addAddress(token, address, addressDetail, addressTitle)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))

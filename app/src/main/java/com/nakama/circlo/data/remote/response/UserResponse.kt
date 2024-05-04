@@ -32,7 +32,7 @@ data class User(
 	val point: Int? = null,
 
 	@field:SerializedName("main_addressId")
-	val mainAddressId: Any? = null,
+	val mainAddressId: String? = null,
 
 	@field:SerializedName("lastname")
 	val lastname: String? = null,
@@ -50,7 +50,13 @@ data class DataUser(
 	val address: List<AddressItem>? = null,
 
 	@field:SerializedName("user")
-	val user: User? = null
+	val user: User? = null,
+
+	@field:SerializedName("userId")
+	val userId: String? = null,
+
+	@field:SerializedName("addressId")
+	val addressId: String? = null
 )
 
 data class AddressItem(
@@ -65,7 +71,10 @@ data class AddressItem(
 	val userId: String? = null,
 
 	@field:SerializedName("addressId")
-	val addressId: String? = null
+	val addressId: String? = null,
+
+	@field:SerializedName("title")
+	val titleAddress: String? = null
 )
 
 data class PostHistoryItem(

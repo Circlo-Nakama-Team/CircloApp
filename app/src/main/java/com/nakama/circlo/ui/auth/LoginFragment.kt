@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.auth
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,7 @@ import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentLoginBinding
 import com.nakama.circlo.utils.Constants.SERVER_CLIENT_ID
 import com.nakama.circlo.utils.hideBottomNavView
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.coroutineScope
@@ -42,6 +44,7 @@ class LoginFragment : Fragment() {
     private val viewmodel by viewModels<AuthViewModel>()
     private lateinit var fcmToken: String
     private lateinit var userToken: String
+    private var loadingDialog: Dialog? = null
 
     var auth = FirebaseAuth.getInstance()
 
@@ -63,6 +66,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
         setupAction()
     }
 
@@ -129,11 +133,11 @@ class LoginFragment : Fragment() {
         viewmodel.registerGoogle(firstname, username, email, fcmToken).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    binding.progressIndicator.show()
+                    loadingDialog?.show()
                     binding.btnLogin.isEnabled = false
                 }
                 is Result.Success -> {
-                    binding.progressIndicator.hide()
+                    loadingDialog?.hide()
                     Log.d("Response Register", it.data.toString())
                     navigateToHome(userToken)
                     Log.d("User Token new", fcmToken)

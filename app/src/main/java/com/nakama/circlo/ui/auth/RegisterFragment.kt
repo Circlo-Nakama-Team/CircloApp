@@ -22,7 +22,6 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private val viewmodel by viewModels<AuthViewModel>()
-    private lateinit var fcmToken: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -46,7 +45,6 @@ class RegisterFragment : Fragment() {
             }
             btnRegister.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    fcmToken = viewmodel.getFcmToken()
                     validateRegister()
                 }
             }
@@ -76,12 +74,12 @@ class RegisterFragment : Fragment() {
             binding.edRegisterEmail.requestFocus()
         }
         else {
-            observeRegister(firstname, lastname, username, email, password, fcmToken)
+            observeRegister(firstname, lastname, username, email, password)
         }
     }
 
-    private fun observeRegister(firstname: String, lastname: String, username: String, email: String, password: String, fcmToken: String) {
-        viewmodel.register(firstname, lastname, username, email, password, fcmToken).observe(viewLifecycleOwner) {
+    private fun observeRegister(firstname: String, lastname: String, username: String, email: String, password: String) {
+        viewmodel.register(firstname, lastname, username, email, password).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
                     binding.progressIndicator.show()

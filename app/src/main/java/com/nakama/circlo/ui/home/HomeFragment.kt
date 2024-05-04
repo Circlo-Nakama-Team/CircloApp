@@ -21,6 +21,7 @@ import com.nakama.circlo.databinding.FragmentHomeBinding
 import com.nakama.circlo.utils.confirmDialog
 import com.nakama.circlo.utils.glide
 import com.nakama.circlo.utils.hide
+import com.nakama.circlo.utils.setupConfirmDonateDialog
 import com.nakama.circlo.utils.show
 import com.nakama.circlo.utils.showBottomNavView
 import com.nakama.circlo.utils.toast
@@ -139,6 +140,27 @@ class HomeFragment : Fragment() {
             cvDropoff.setOnClickListener {
                 val action = HomeFragmentDirections.actionHomeFragmentToDropOffFragment()
                 findNavController().navigate(action)
+            }
+            btnTopUp.setOnClickListener {
+                setupConfirmDonateDialog(
+                    onDonateClick = {
+                        val action = HomeFragmentDirections.actionHomeFragmentToDropOffFragment()
+                        findNavController().navigate(action)
+                    },
+                    onPickupClick = {
+                        val action = HomeFragmentDirections.actionHomeFragmentToPickUpFragment()
+                        findNavController().navigate(action)
+                    }
+                )
+            }
+            btnRedeem.setOnClickListener {
+                toast("Fitur masih dalam tahap pengembangan")
+            }
+            btnNotif.setOnClickListener {
+                toast("Fitur masih dalam tahap pengembangan")
+            }
+            cvExplore.setOnClickListener {
+                toast("Fitur masih dalam tahap pengembangan")
             }
         }
     }

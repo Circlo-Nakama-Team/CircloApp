@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.scan
 
+import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,7 @@ import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.reduceFileImage
 import com.nakama.circlo.utils.setupConfirmDonateDialog
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.toast
 import com.nakama.circlo.utils.uriToFile
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +37,7 @@ class ResultFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var imageUri: Uri
     private lateinit var trashAdapter: TrashResultAdapter
+    private var loadingDialog: Dialog? = null
 
     private val viewModel by viewModels<ScanViewModel>()
 
@@ -55,6 +58,8 @@ class ResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        loadingDialog = showAnimationDialog()
 
         // Get data Bundle from previous fragment
         val imageUriString = arguments?.getString("imageUri")
@@ -99,15 +104,18 @@ class ResultFragment : Fragment() {
             when (it) {
                 is Result.Loading -> {
                     binding.progressBar.show()
+                    loadingDialog?.show()
                 }
                 is Result.Success -> {
                     binding.progressBar.hide()
+                    loadingDialog?.cancel()
                     trashAdapter.differ.submitList(it.data.data?.trashIdeas)
                     setupRvTrash()
                     setupAction(it.data.data!!)
                 }
                 is Result.Error -> {
                     binding.progressBar.hide()
+                    loadingDialog?.cancel()
                     Log.e("Scan Trash", it.error)
                     toast(it.error)
                 }

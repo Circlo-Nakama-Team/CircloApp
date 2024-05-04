@@ -20,6 +20,7 @@ import com.nakama.circlo.data.remote.response.DataTrash
 import com.nakama.circlo.data.remote.response.TrashIdeasItem
 import com.nakama.circlo.databinding.FragmentTrashDetailBinding
 import com.nakama.circlo.utils.hide
+import com.nakama.circlo.utils.invisible
 import com.nakama.circlo.utils.show
 
 class TrashDetailFragment : Fragment() {
@@ -82,6 +83,9 @@ class TrashDetailFragment : Fragment() {
         binding.btnPrev.setOnClickListener {
             trashViewPager.currentItem = trashViewPager.currentItem - 1
         }
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun setupTrashResultItem() {
@@ -136,17 +140,17 @@ class TrashDetailFragment : Fragment() {
             }
         }
         if (trashDetailAdapter.itemCount == 1) {
-            btnNext.hide()
-            btnPrev.hide()
+            btnNext.invisible()
+            btnPrev.invisible()
         } else {
             when (position) {
                 0 -> {
-                    btnPrev.hide()
+                    btnPrev.invisible()
                     btnNext.show()
                 }
                 trashDetailAdapter.itemCount - 1 -> {
                     btnPrev.show()
-                    btnNext.hide()
+                    btnNext.invisible()
                 }
                 else -> {
                     btnPrev.show()

@@ -19,4 +19,6 @@ class SharedViewModel @Inject constructor(
         return repository.getUser().asLiveData()
     }
 
+    fun getProfile(token: String) = repository.getProfile(token)
+    fun getDetailAddress(token: String, addressId: String) = repository.getDetailAddress(token, addressId)
 }

@@ -87,7 +87,9 @@ class CommunityFragment : Fragment() {
                 }
                 is Result.Error -> {
                     binding.progressBar.hide()
-                    toast(result.error)
+                    if (result.error.trimEnd() == "HTTP 404") {
+                        binding.ivEmpty.show()
+                    }
                 }
             }
         }

@@ -194,6 +194,41 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/see_address_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_12sdp">
+
+                    <ImageView
+                        android:id="@+id/ic_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_books"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/_16sdp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Daftar Alamat"
+                        android:textColor="@color/inverseSurface"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_alignTop="@id/ic_address"
+                        android:layout_toEndOf="@id/ic_address"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_right"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/tv_about"
                     android:layout_width="match_parent"
@@ -256,9 +291,9 @@
                         android:id="@+id/ic_terms_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_pencil"
+                        android:src="@drawable/ic_privacy"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="@dimen/_16sdp"/>
+                        android:layout_marginStart="@dimen/_18sdp"/>
 
                     <TextView
                         android:id="@+id/tv_terms"

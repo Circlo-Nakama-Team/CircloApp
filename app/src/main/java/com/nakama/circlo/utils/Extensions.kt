@@ -68,6 +68,9 @@ fun View.hide() {
     visibility = View.GONE
 }
 
+fun View.invisible() {
+    visibility = View.INVISIBLE
+}
 fun Activity.toast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
@@ -175,6 +178,24 @@ fun Fragment.setupConfirmDonateDialog(
         onPickupClick()
         dialog.dismiss()
     }
+}
+
+fun Fragment.showAnimationDialog() : Dialog {
+    val dialog = Dialog(requireContext(), android.R.style.Theme_Dialog)
+    val view = layoutInflater.inflate(R.layout.show_loading, null)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setContentView(view)
+    dialog.setTitle(null)
+    dialog.setCancelable(false)
+    dialog.setOnCancelListener(null)
+    dialog.window?.setGravity(Gravity.CENTER)
+    dialog.window?.setLayout(
+        WindowManager.LayoutParams.MATCH_PARENT,
+        WindowManager.LayoutParams.WRAP_CONTENT
+    )
+    dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+    return dialog
 }
 
 fun confirmDialog(

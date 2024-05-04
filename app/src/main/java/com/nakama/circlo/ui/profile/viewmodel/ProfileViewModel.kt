@@ -23,4 +23,23 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun getProfile(token: String) = repository.getProfile(token)
+
+    fun addAddress(
+        token: String,
+        address: String,
+        addressDetail: String,
+        addressTitle: String
+    ) = repository.addAddress(token, address, addressDetail, addressTitle)
+
+    fun updateMainAddress(
+        token: String, addressId: String
+    ) = repository.updateMainAddress(token, addressId)
+
+    fun editAddress(
+        token: String,
+        address: String,
+        addressDetail: String,
+        addressTitle: String,
+        addressId: String
+    ) = repository.editAddress(token, address, addressDetail, addressTitle, addressId)
 }

@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_profileFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -126,6 +129,11 @@
         <action
             android:id="@+id/action_pickUpFragment_to_successFragment"
             app:destination="@id/successFragment" />
+        <action
+            android:id="@+id/action_pickUpFragment_to_addressFragment"
+            app:destination="@id/addressFragment"
+            app:popUpTo="@id/pickUpFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/trashDetailFragment"
@@ -162,6 +170,32 @@
         tools:layout="@layout/fragment_detail_donate" >
         <argument
             android:name="donateId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.nakama.circlo.ui.profile.address.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" >
+        <action
+            android:id="@+id/action_addressFragment_to_detailAddressFragment"
+            app:destination="@id/detailAddressFragment" />
+        <argument
+            android:name="isPickup"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_addressFragment_to_pickUpFragment"
+            app:destination="@id/pickUpFragment"
+            app:popUpTo="@+id/addressFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/detailAddressFragment"
+        android:name="com.nakama.circlo.ui.profile.address.DetailAddressFragment"
+        android:label="fragment_detail_address"
+        tools:layout="@layout/fragment_detail_address" >
+        <argument
+            android:name="addressId"
             app:argType="string" />
     </fragment>
 </navigation>

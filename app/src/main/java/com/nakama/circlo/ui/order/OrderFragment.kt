@@ -64,15 +64,18 @@ class OrderFragment : Fragment() {
                 }
                 is Result.Success -> {
                     binding.progressBar.hide()
-                    if (it.data.data?.donateDatas.isNullOrEmpty()) {
-                        binding.ivEmpty.show()
-                        return@observe
-                    }
+//                    if (it.data.data?.donateDatas.isNullOrEmpty()) {
+//
+//                        return@observe
+//                    }
                     donateHistoryAdapter.differ.submitList(it.data.data?.donateDatas)
                     setupRvOrderHistory()
                 }
                 is Result.Error -> {
                     binding.progressBar.hide()
+                    if (it.error.trimEnd() == "HTTP 404") {
+                        binding.ivEmpty.show()
+                    }
                     Log.d("Error History DOnate", it.error)
                 }
             }

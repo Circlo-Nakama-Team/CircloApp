@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.profile.address.DetailAddressFragment">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeWidth="0.5dp"
+            android:elevation="1dp"
+            app:cardCornerRadius="0dp">
+
+            <RelativeLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_back"
+                    app:tint="@color/greenLight" />
+
+                <TextView
+                    android:id="@+id/tv_title_appbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black"
+                    android:layout_toEndOf="@id/btn_back"
+                    android:textSize="@dimen/_16ssp"
+                    android:layout_centerVertical="true"
+                    tools:text="Ubah Alamat"/>
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tl_address_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                app:boxBackgroundMode="outline"
+                app:hintEnabled="false"
+                app:boxStrokeColor="@color/softGrey"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/ed_address_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="textStart"
+                    android:gravity="start"
+                    android:inputType="text"
+                    android:hint="Address Title"
+                    android:text=""/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tl_full_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginVertical="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:boxBackgroundMode="outline"
+                app:hintEnabled="false"
+                app:boxStrokeColor="@color/softGrey"
+                app:layout_constraintTop_toBottomOf="@id/tl_address_title">
+
+                <EditText
+                    android:id="@+id/ed_full_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_120sdp"
+                    android:textAlignment="textStart"
+                    android:gravity="start"
+                    android:inputType="textMultiLine"
+                    android:hint="@string/add_description_here"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tl_address_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                app:boxBackgroundMode="outline"
+                app:hintEnabled="false"
+                app:boxStrokeColor="@color/softGrey"
+                app:layout_constraintTop_toBottomOf="@id/tl_full_address">
+
+                <EditText
+                    android:id="@+id/ed_address_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:gravity="start"
+                    android:inputType="textMultiLine"
+                    android:hint="Address Detail \nex :Rumah Warna hijau"
+                    android:text=""/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Switch
+                android:id="@+id/sw_main_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Atur sebagai alamat utama    "
+                android:fontFamily="@font/roboto"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tl_address_detail"
+                android:checked="false"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_48sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_36sdp"
+                android:fontFamily="@font/roboto"
+                android:text="Save"
+                android:enabled="false"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/sw_main_address"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

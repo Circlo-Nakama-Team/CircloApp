@@ -1,5 +1,6 @@
 package com.nakama.circlo.data.remote.retrofit
 
+import com.nakama.circlo.data.remote.response.AddressResponse
 import com.nakama.circlo.data.remote.response.AuthResponse
 import com.nakama.circlo.data.remote.response.CertainDonateResponse
 import com.nakama.circlo.data.remote.response.CommunityResponse
@@ -30,8 +31,7 @@ interface ApiService {
         @Field("lastname") lastname: String,
         @Field("username") username: String,
         @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("fcmToken") fcmToken: String
+        @Field("password") password: String
     ): AuthResponse
 
     @FormUrlEncoded
@@ -76,8 +76,9 @@ interface ApiService {
     @POST("user/profile/address")
     suspend fun addAddress(
         @Header("Authorization") token: String,
-        @Path("address") address: String,
-        @Path("detail_address") detailAddress: String,
+        @Field("address") address: String,
+        @Field("detail_address") detailAddress: String,
+        @Field("addressTitle") addressTitle: String,
     ): UserResponse
 
     @FormUrlEncoded
@@ -85,6 +86,23 @@ interface ApiService {
     suspend fun updateProfile(
         @Header("Authorization") token: String,
         @Path("username") username: String,
+        @Path("addressId") addressId: String
+    ): UserResponse
+
+    @FormUrlEncoded
+    @PUT("user/profile")
+    suspend fun updateMainAddress(
+        @Header("Authorization") token: String,
+        @Field("addressId") addressId: String
+    ): UserResponse
+
+    @FormUrlEncoded
+    @PUT("user/profile/address/{addressId}")
+    suspend fun editAddress(
+        @Header("Authorization") token: String,
+        @Field("address") address: String,
+        @Field("detail_address") detailAddress: String,
+        @Field("addressTitle") addressTitle: String,
         @Path("addressId") addressId: String
     ): UserResponse
 
@@ -102,10 +120,10 @@ interface ApiService {
     ): UserResponse
 
     @GET("user/profile/address/{addressId}")
-    suspend fun getAddress(
+    suspend fun getDetailAddress(
         @Header("Authorization") token: String,
         @Path("addressId") addressId: String
-    ): UserResponse
+    ): AddressResponse
 
     // Community
     @GET("community")

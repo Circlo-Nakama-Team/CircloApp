@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.donate.dropoff
 
+import android.app.Dialog
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -21,6 +22,7 @@ import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.reduceFileImage
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.timeSpinner
 import com.nakama.circlo.utils.toast
 import com.nakama.circlo.utils.transformIntoDatePicker
@@ -42,6 +44,7 @@ class DropOffFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: ItemDonateAdapter
     private val viewModel by viewModels<DonateViewModel>()
+    private var loadingDialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +65,7 @@ class DropOffFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
         setupRv()
 
         // Get bundle from previous fragment
@@ -203,16 +207,18 @@ class DropOffFragment : Fragment() {
             when (it) {
                 is Result.Loading -> {
                     binding.btnDonateNow.isEnabled = false
-                    binding.progressBar.show()
+                    loadingDialog?.show()
                 }
 
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     Log.d("Donate Success", it.data.toString())
                     findNavController().navigate(DropOffFragmentDirections.actionDropOffFragmentToSuccessFragment())
                 }
 
                 is Result.Error -> {
-                    binding.progressBar.hide()
+                    loadingDialog?.cancel()
+                    loadingDialog?.cancel()
                     toast(it.error)
                     Log.d("Donate", it.error)
                 }
@@ -223,6 +229,9 @@ class DropOffFragment : Fragment() {
     private fun setupAction(token: String) {
         binding.btnDonateNow.setOnClickListener {
             donateNow(token)
+        }
+        binding.btnChangeLocation.setOnClickListener {
+            toast("Maaf untuk saat ini drop point terbatas hanya 1 lokasi")
         }
     }
 

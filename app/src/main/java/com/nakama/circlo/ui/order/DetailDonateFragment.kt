@@ -1,11 +1,14 @@
 package com.nakama.circlo.ui.order
 
+import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.AutoTransition
@@ -15,10 +18,13 @@ import com.nakama.circlo.adapter.ImageDetailDonateAdapter
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.data.remote.response.DonateData
 import com.nakama.circlo.databinding.FragmentDetailDonateBinding
+import com.nakama.circlo.ui.MainActivity
 import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.singleton.DataSingleton
+import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +35,7 @@ class DetailDonateFragment : Fragment() {
     private val viewModel by viewModels<OrderViewModel>()
     private lateinit var itemDonateAdapter: ImageDetailDonateAdapter
     private lateinit var donateId: String
+    private var loadingDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +55,7 @@ class DetailDonateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
         setupRv()
         donateId = DetailDonateFragmentArgs.fromBundle(arguments as Bundle).donateId
         getUserToken()
@@ -65,18 +73,18 @@ class DetailDonateFragment : Fragment() {
         viewModel.getDetailDonate(token, donateId).observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
-                    binding.progressBar.show()
+                    loadingDialog?.show()
                 }
                 is Result.Success -> {
-                    binding.progressBar.hide()
+                    loadingDialog?.cancel()
                     val response = it.data.data?.donateItem ?: return@observe
                     setUpAction(response)
                     setupRvOrderHistory()
                     itemDonateAdapter.addItems(response.image!!)
                 }
                 is Result.Error -> {
-                    binding.progressBar.hide()
-                    Log.d("Error History DOnate", it.error)
+                    loadingDialog?.cancel()
+                    toast(it.error)
                 }
             }
         }
@@ -101,6 +109,9 @@ class DetailDonateFragment : Fragment() {
                     expandButton.setImageResource(R.drawable.expand_less)
                     TransitionManager.beginDelayedTransition(containerDetail, AutoTransition())
                 }
+            }
+            btnRefreshPage.setOnClickListener {
+                getUserToken()
             }
         }
     }

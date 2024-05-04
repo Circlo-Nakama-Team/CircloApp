@@ -105,7 +105,12 @@ dependencies {
 
     // Shimmer loading
     implementation ("com.facebook.shimmer:shimmer:0.2.0@aar")
+
+    // Pick Image
     implementation ("com.github.jrvansuita:PickImage:3.0.2")
+
+    // LottieFiles
+    implementation ("com.airbnb.android:lottie:6.4.0")
 }
 kapt {
     correctErrorTypes = true

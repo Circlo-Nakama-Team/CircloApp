@@ -23,9 +23,8 @@ class AuthViewModel @Inject constructor(
         lastname: String,
         username: String,
         email: String,
-        password: String,
-        fcmToken: String
-    ) = repository.register(firstname, lastname, username, email, password, fcmToken)
+        password: String
+    ) = repository.register(firstname, lastname, username, email, password)
 
     fun registerGoogle(
         firstname: String,

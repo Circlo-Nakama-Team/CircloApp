@@ -1,8 +1,10 @@
 package com.nakama.circlo.ui.donate.pickup
 
+import android.app.Dialog
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +17,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nakama.circlo.adapter.ItemDonateAdapter
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentPickUpBinding
+import com.nakama.circlo.ui.SharedViewModel
 import com.nakama.circlo.ui.donate.DonateViewModel
+import com.nakama.circlo.utils.glide
 import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.reduceFileImage
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
+import com.nakama.circlo.utils.singleton.DataSingleton
 import com.nakama.circlo.utils.timeSpinner
 import com.nakama.circlo.utils.toast
 import com.nakama.circlo.utils.transformIntoDatePicker
@@ -42,6 +48,10 @@ class PickUpFragment : Fragment() {
 
     private lateinit var adapter: ItemDonateAdapter
     private val viewModel by viewModels<DonateViewModel>()
+    private val sharedViewModel by viewModels<SharedViewModel>()
+    private var selectedRadioText = ""
+    private var addressId: String = ""
+    private var loadingDialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +72,12 @@ class PickUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
+
         setupRv()
+        getValueOfRadioButton()
+        addressId = arguments?.getString("addressId") ?: ""
+        getDetailProfile("Bearer ${DataSingleton.getInstance().userToken}")
         // Get bundle from previous fragment
         val imageUri = arguments?.getString("imageUri")
         val category = arguments?.getString("category")
@@ -124,18 +139,37 @@ class PickUpFragment : Fragment() {
         }
     }
 
-    private fun getValueOfRadioButton() : String {
+    private fun getValueOfRadioButton() {
         val radioGroup = binding.chooseTrashType
-        val selectedId = radioGroup.checkedRadioButtonId
-        val radioButton = requireView().findViewById<RadioButton>(selectedId)
-        return radioButton.id.toString()
+
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val selectedRadioButton = requireView().findViewById<RadioButton>(checkedId)
+            val selectedId = selectedRadioButton.id
+            Log.d("Pickup Radio", selectedId.toString())
+            selectedRadioText = selectedRadioButton.text.toString()
+            Log.d("Pickup Radio", selectedRadioText)
+        }
     }
 
     private fun donateNow(token: String) {
-        val trashCategoriesId = "trashcat-1"
+        val trashCategoriesId =
+            when(selectedRadioText) {
+                "Organik" -> {
+                    "trashcat-1"
+                }
+                "Anorganik" -> {
+                    "trashcat-2"
+                }
+                "Limbah B3" -> {
+                    "trashcat-3"
+                }
+                else -> {
+                    "trashcat-2"
+                }
+            }
         val address = binding.tvMainAddress.text.toString()
         val detailAddress = binding.tvDetailAddress.text.toString()
-        val donateMethod = "pickup"
+        val donateMethod = "Pick Up"
         val donateDescription = binding.edDropoffDescription.text.toString()
         val donateDate = binding.edPickupDate.text.toString()
         val donateSchedule = when (binding.tvPickupTime.text.toString()) {
@@ -199,14 +233,16 @@ class PickUpFragment : Fragment() {
             when (it) {
                 is Result.Loading -> {
                     binding.btnDonateNow.isEnabled = false
-                    binding.progressBar.show()
+                    loadingDialog?.show()
                 }
 
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     findNavController().navigate(PickUpFragmentDirections.actionPickUpFragmentToSuccessFragment())
                 }
 
                 is Result.Error -> {
+                    loadingDialog?.cancel()
                     binding.progressBar.hide()
                     toast(it.error)
                 }
@@ -214,9 +250,69 @@ class PickUpFragment : Fragment() {
         }
     }
 
+    private fun getDetailProfile(token: String) {
+        sharedViewModel.getProfile(token).observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Loading -> {
+                    loadingDialog?.show()
+                }
+                is Result.Success -> {
+                    loadingDialog?.cancel()
+                    val responseData = it.data.data
+                    if (addressId != "") {
+                        getDetailAddress(token, addressId)
+                    } else {
+                        getDetailAddress(token, responseData?.user?.mainAddressId.toString())
+                    }
+
+                }
+                is Result.Error -> {
+                    Log.d("Get Profile", it.error)
+                }
+            }
+        }
+    }
+
+    private fun getDetailAddress(token: String, addressId: String) {
+        if (addressId == "null") {
+            binding.apply {
+                tvAddress.text = "Address is empty"
+                tvMainAddress.text = "Please add your address"
+                tvDetailAddress.text = ""
+                btnChangeAddress.text = "Add Address"
+            }
+            return
+        } else {
+            sharedViewModel.getDetailAddress(token, addressId).observe(viewLifecycleOwner) {
+                when (it) {
+                    is Result.Loading -> {
+
+                    }
+                    is Result.Success -> {
+                        val responseData = it.data.dataAddress?.addressData
+                        binding.apply {
+                            tvAddress.text = responseData?.first()?.title
+                            tvMainAddress.text = responseData?.first()?.address
+                            tvDetailAddress.text = responseData?.first()?.detailAddress
+                            btnChangeAddress.text = "Change"
+                        }
+                    }
+                    is Result.Error -> {
+                        Log.d("Get Address", it.error)
+                    }
+                }
+            }
+        }
+
+    }
+
+
     private fun setupAction(token: String) {
         binding.btnDonateNow.setOnClickListener {
             donateNow(token)
+        }
+        binding.btnChangeAddress.setOnClickListener {
+            findNavController().navigate(PickUpFragmentDirections.actionPickUpFragmentToAddressFragment(true))
         }
     }
 

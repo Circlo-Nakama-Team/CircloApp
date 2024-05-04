@@ -33,6 +33,7 @@ class ImageDetailDonateAdapter: RecyclerView.Adapter<ImageDetailDonateAdapter.De
     }
 
     fun addItems(newDataSet: List<String>) {
+        imageItems.clear()
         imageItems.addAll(newDataSet)
         this.notifyDataSetChanged()
     }

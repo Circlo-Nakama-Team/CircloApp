@@ -18,6 +18,7 @@ import com.nakama.circlo.utils.glide
 import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.show
 import com.nakama.circlo.utils.showBottomNavView
+import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -59,6 +60,7 @@ class ProfileFragment : Fragment() {
             viewAlreadyLogin.show()
             btnLogout.show()
             changeProfileAction.show()
+            seeAddressAction.show()
         }
         getDetailProfile("Bearer $token")
         setupActionUser()
@@ -70,6 +72,7 @@ class ProfileFragment : Fragment() {
             viewAlreadyLogin.hide()
             btnLogout.hide()
             changeProfileAction.hide()
+            seeAddressAction.hide()
         }
         setupActionGuest()
     }
@@ -101,6 +104,12 @@ class ProfileFragment : Fragment() {
             btnLogin.setOnClickListener {
                 actionToAuth()
             }
+            changePanduanAction.setOnClickListener {
+                toast("Fitur masih dalam tahap pengembangan")
+            }
+            changeTermsAction.setOnClickListener {
+                toast("Fitur masih dalam tahap pengembangan")
+            }
         }
     }
 
@@ -118,6 +127,18 @@ class ProfileFragment : Fragment() {
                     viewModel.logout()
                     refreshPage()
                 }
+            }
+            seeAddressAction.setOnClickListener {
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToAddressFragment(false))
+            }
+            changeProfileAction.setOnClickListener {
+                toast("Fitur masih dalam tahap pengembangan")
+            }
+            changePanduanAction.setOnClickListener {
+                toast("Fitur masih dalam tahap pengembangan")
+            }
+            changeTermsAction.setOnClickListener {
+                toast("Fitur masih dalam tahap pengembangan")
             }
         }
     }
