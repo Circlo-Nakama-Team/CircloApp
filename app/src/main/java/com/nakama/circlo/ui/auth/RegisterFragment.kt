@@ -90,7 +90,7 @@ class RegisterFragment : Fragment() {
                     confirmDialog(
                         requireContext(),
                         "Register Success",
-                        "Please login to continue",
+                        "Please check your email for verification",
                         "Continue",
                         ""
                     ) {

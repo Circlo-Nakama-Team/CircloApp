@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+import com.nakama.circlo.R
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentHomeBinding
 import com.nakama.circlo.utils.confirmDialog
@@ -154,13 +155,13 @@ class HomeFragment : Fragment() {
                 )
             }
             btnRedeem.setOnClickListener {
-                toast("Fitur masih dalam tahap pengembangan")
+                toast(getString(R.string.info_dev_mode))
             }
             btnNotif.setOnClickListener {
-                toast("Fitur masih dalam tahap pengembangan")
+                toast(getString(R.string.info_dev_mode))
             }
             cvExplore.setOnClickListener {
-                toast("Fitur masih dalam tahap pengembangan")
+                toast(getString(R.string.info_dev_mode))
             }
         }
     }

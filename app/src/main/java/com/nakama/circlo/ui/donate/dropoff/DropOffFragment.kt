@@ -14,14 +14,13 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nakama.circlo.R
 import com.nakama.circlo.adapter.ItemDonateAdapter
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentDropOffBinding
 import com.nakama.circlo.ui.donate.DonateViewModel
-import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.reduceFileImage
-import com.nakama.circlo.utils.show
 import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.timeSpinner
 import com.nakama.circlo.utils.toast
@@ -45,6 +44,7 @@ class DropOffFragment : Fragment() {
     private lateinit var adapter: ItemDonateAdapter
     private val viewModel by viewModels<DonateViewModel>()
     private var loadingDialog: Dialog? = null
+    private var selectedRadioText = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,7 +67,7 @@ class DropOffFragment : Fragment() {
 
         loadingDialog = showAnimationDialog()
         setupRv()
-
+        getValueOfRadioButton()
         // Get bundle from previous fragment
         val imageUri = arguments?.getString("imageUri")
         val category = arguments?.getString("category")
@@ -132,18 +132,37 @@ class DropOffFragment : Fragment() {
         }
     }
 
-    private fun getValueOfRadioButton() : String {
+    private fun getValueOfRadioButton() {
         val radioGroup = binding.chooseTrashType
-        val selectedId = radioGroup.checkedRadioButtonId
-        val radioButton = requireView().findViewById<RadioButton>(selectedId)
-        return radioButton.id.toString()
+
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val selectedRadioButton = requireView().findViewById<RadioButton>(checkedId)
+            val selectedId = selectedRadioButton.id
+            Log.d("Pickup Radio", selectedId.toString())
+            selectedRadioText = selectedRadioButton.text.toString()
+            Log.d("Pickup Radio", selectedRadioText)
+        }
     }
 
     private fun donateNow(token: String) {
-        val trashCategoriesId = "trashcat-1"
-        val address = binding.tvTitleDropPoint.text.toString()
+        val trashCategoriesId =
+            when(selectedRadioText) {
+                "Organic" -> {
+                    "trashcat-1"
+                }
+                "Anorganic" -> {
+                    "trashcat-2"
+                }
+                "B3 Waste" -> {
+                    "trashcat-3"
+                }
+                else -> {
+                    "trashcat-2"
+                }
+            }
+        val address = binding.tvTitlePointLocation.text.toString()
         val detailAddress = binding.tvMainAddress.text.toString()
-        val donateMethod = "self-service"
+        val donateMethod = "Self-service"
         val donateDescription = binding.edDropoffDescription.text.toString()
         val donateDate = binding.edPickupDate.text.toString()
         val donateSchedule = when (binding.tvPickupTime.text.toString()) {
@@ -231,7 +250,7 @@ class DropOffFragment : Fragment() {
             donateNow(token)
         }
         binding.btnChangeLocation.setOnClickListener {
-            toast("Maaf untuk saat ini drop point terbatas hanya 1 lokasi")
+            toast(getString(R.string.info_limited_drop_point))
         }
     }
 

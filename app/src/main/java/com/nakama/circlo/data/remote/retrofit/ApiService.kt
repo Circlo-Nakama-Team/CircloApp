@@ -43,11 +43,6 @@ interface ApiService {
         @Field("fcmToken") fcmToken: String
     ): AuthResponse
 
-    @GET("auth/oauth/token?authtoken={authToken}")
-    suspend fun oauthGoogle(
-        @Path("authToken") authToken: String
-    ) : AuthResponse
-
     @FormUrlEncoded
     @POST("auth/login")
     suspend fun login(

@@ -95,7 +95,7 @@
                     android:textAlignment="textStart"
                     android:gravity="start"
                     android:inputType="text"
-                    android:hint="Address Title"
+                    android:hint="@string/address_title"
                     android:text=""/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -142,7 +142,7 @@
                     android:textAlignment="textStart"
                     android:gravity="start"
                     android:inputType="textMultiLine"
-                    android:hint="Address Detail \nex :Rumah Warna hijau"
+                    android:hint="@string/address_detail_hint"
                     android:text=""/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -151,7 +151,7 @@
                 android:id="@+id/sw_main_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Atur sebagai alamat utama    "
+                android:text="@string/set_main_address"
                 android:fontFamily="@font/roboto"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:layout_marginStart="@dimen/_16sdp"
@@ -167,7 +167,7 @@
                 android:layout_marginHorizontal="@dimen/_16sdp"
                 android:layout_marginTop="@dimen/_36sdp"
                 android:fontFamily="@font/roboto"
-                android:text="Save"
+                android:text="@string/save"
                 android:enabled="false"
                 android:textAllCaps="false"
                 android:textStyle="bold"

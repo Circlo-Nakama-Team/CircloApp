@@ -19,11 +19,9 @@ import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentPickUpBinding
 import com.nakama.circlo.ui.SharedViewModel
 import com.nakama.circlo.ui.donate.DonateViewModel
-import com.nakama.circlo.utils.glide
 import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.reduceFileImage
-import com.nakama.circlo.utils.show
 import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.singleton.DataSingleton
 import com.nakama.circlo.utils.timeSpinner
@@ -154,13 +152,13 @@ class PickUpFragment : Fragment() {
     private fun donateNow(token: String) {
         val trashCategoriesId =
             when(selectedRadioText) {
-                "Organik" -> {
+                "Organic" -> {
                     "trashcat-1"
                 }
-                "Anorganik" -> {
+                "Anorganic" -> {
                     "trashcat-2"
                 }
-                "Limbah B3" -> {
+                "B3 Waste" -> {
                     "trashcat-3"
                 }
                 else -> {

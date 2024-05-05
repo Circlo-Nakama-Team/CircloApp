@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.community
 
+import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.nakama.circlo.utils.confirmDialog
 import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.toast
 import com.nakama.circlo.utils.uriToFile
 import com.vansuita.pickimage.bundle.PickSetup
@@ -34,6 +36,7 @@ class AddPostFragment : Fragment() {
     private lateinit var adapter: PostItemAdapter
     private val viewModel by viewModels<CommunityViewModel>()
     private var imageUri: Uri? = null
+    private var loadingDialog: Dialog? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -52,6 +55,7 @@ class AddPostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
         validateUserToken()
     }
 
@@ -105,9 +109,10 @@ class AddPostFragment : Fragment() {
         viewModel.addPost(token, caption, image).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
-                    binding.progressBar.show()
+                    loadingDialog?.show()
                 }
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     confirmDialog(
                         requireContext(),
                         "Post added successfully",
@@ -119,6 +124,7 @@ class AddPostFragment : Fragment() {
                     }
                 }
                 is Result.Error -> {
+                    loadingDialog?.cancel()
                     binding.progressBar.hide()
                     toast(result.error)
                 }

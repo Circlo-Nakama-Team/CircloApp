@@ -39,7 +39,7 @@
                 android:id="@+id/tv_potential"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Potensial Harga"
+                android:text="@string/potensial_harga"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textColor="@color/greenLight"
                 android:fontFamily="@font/roboto"

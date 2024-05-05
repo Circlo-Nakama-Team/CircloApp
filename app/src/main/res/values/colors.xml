@@ -16,6 +16,6 @@
     <color name="yellowLight">#80FDE186</color>
     <color name="yellow">#EFAE07</color>
     <color name="red">#F44336</color>
-
+    <color name="bg_placeholder">#dddddd</color>
 
 </resources>

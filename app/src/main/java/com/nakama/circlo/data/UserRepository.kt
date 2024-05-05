@@ -27,20 +27,14 @@ class UserRepository @Inject constructor(
         try {
             val response = apiService.login(email, password, fcmToken)
             emit(Result.Success(response))
-        } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, DonateResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
         }
     }
 
-    fun authGoogle(authToken: String) : LiveData<Result<AuthResponse>> = liveData {
-        emit(Result.Loading)
-        try {
-            val response = apiService.oauthGoogle(authToken)
-            emit(Result.Success(response))
-        } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
-        }
-    }
 
     fun register(
         firstname: String,
@@ -251,12 +245,10 @@ class UserRepository @Inject constructor(
         try {
             val response = apiService.getDonateHistories(token)
             emit(Result.Success(response))
-        } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, DonateResponse::class.java)
-            val errorMessage = errorBody.status
+            val errorMessage = errorBody.message
             emit(Result.Error(errorMessage.toString()))
         }
     }

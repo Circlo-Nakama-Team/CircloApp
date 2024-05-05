@@ -20,10 +20,24 @@ data class DataPostCommunity(
 	val posts: List<PostsItem>? = null
 )
 
+data class UserPost(
+	@field:SerializedName("userId")
+	val userId: String? = null,
+
+	@field:SerializedName("username")
+	val username: String? = null,
+
+	@field:SerializedName("image")
+	val image: String? = null
+)
+
 data class PostsItem(
 
 	@field:SerializedName("id")
 	val id: String? = null,
+
+	@field:SerializedName("user")
+	val user: UserPost? = null,
 
 	@field:SerializedName("postTime")
 	val postTime: String? = null,
@@ -33,9 +47,6 @@ data class PostsItem(
 
 	@field:SerializedName("postBody")
 	val postBody: String? = null,
-
-	@field:SerializedName("userId")
-	val userId: String? = null,
 
 	@field:SerializedName("postImage")
 	val postImage: String? = null

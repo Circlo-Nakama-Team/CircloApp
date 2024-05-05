@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Donate History"
+                android:text="@string/donate_history"
                 android:textSize="@dimen/_16sdp"
                 android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/inverseSurface"

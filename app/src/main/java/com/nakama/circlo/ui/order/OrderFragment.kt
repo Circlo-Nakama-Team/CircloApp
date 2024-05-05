@@ -1,7 +1,6 @@
 package com.nakama.circlo.ui.order
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -64,19 +63,14 @@ class OrderFragment : Fragment() {
                 }
                 is Result.Success -> {
                     binding.progressBar.hide()
-//                    if (it.data.data?.donateDatas.isNullOrEmpty()) {
-//
-//                        return@observe
-//                    }
                     donateHistoryAdapter.differ.submitList(it.data.data?.donateDatas)
                     setupRvOrderHistory()
                 }
                 is Result.Error -> {
                     binding.progressBar.hide()
-                    if (it.error.trimEnd() == "HTTP 404") {
+                    if (it.error == "Donate Data not found") {
                         binding.ivEmpty.show()
                     }
-                    Log.d("Error History DOnate", it.error)
                 }
             }
         }

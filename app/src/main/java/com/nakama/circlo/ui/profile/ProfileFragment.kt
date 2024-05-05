@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.nakama.circlo.R
 import com.nakama.circlo.ui.MainActivity
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentProfileBinding
@@ -105,10 +106,10 @@ class ProfileFragment : Fragment() {
                 actionToAuth()
             }
             changePanduanAction.setOnClickListener {
-                toast("Fitur masih dalam tahap pengembangan")
+                toast(getString(R.string.info_dev_mode))
             }
             changeTermsAction.setOnClickListener {
-                toast("Fitur masih dalam tahap pengembangan")
+                toast(getString(R.string.info_dev_mode))
             }
         }
     }
@@ -132,13 +133,13 @@ class ProfileFragment : Fragment() {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToAddressFragment(false))
             }
             changeProfileAction.setOnClickListener {
-                toast("Fitur masih dalam tahap pengembangan")
+                toast(getString(R.string.info_dev_mode))
             }
             changePanduanAction.setOnClickListener {
-                toast("Fitur masih dalam tahap pengembangan")
+                toast(getString(R.string.info_dev_mode))
             }
             changeTermsAction.setOnClickListener {
-                toast("Fitur masih dalam tahap pengembangan")
+                toast(getString(R.string.info_dev_mode))
             }
         }
     }

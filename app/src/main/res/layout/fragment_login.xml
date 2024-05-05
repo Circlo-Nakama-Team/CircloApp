@@ -20,7 +20,7 @@
         android:id="@+id/tv_title_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Circlo Login"
+        android:text="@string/circlo_login"
         android:textColor="@color/greenLight"
         android:fontFamily="@font/roboto_medium"
         android:textSize="@dimen/_18ssp"

@@ -33,13 +33,13 @@ class PostItemAdapter: RecyclerView.Adapter<PostItemAdapter.ViewHolder>() {
         val listItem = differ.currentList[position]
         if (listItem != null) {
             holder.binding.apply {
-                ivProfile.glide(listItem.postImage!!)
-                tvName.text = listItem.userId
+                ivProfile.glide(listItem.user?.image!!)
+                tvName.text = listItem.user.username.toString()
                 tvDate.text = convertDate(listItem.postTime!!)
                 tvDesc.text = listItem.postBody
                 tvLikeCount.text = listItem.postLikes.toString()
                 if (listItem.postImage != "") {
-                    ivPost.glide(listItem.postImage)
+                    ivPost.glide(listItem.postImage.toString())
                 } else {
                     ivPost.hide()
                 }

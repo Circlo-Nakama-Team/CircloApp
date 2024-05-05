@@ -26,6 +26,7 @@ import com.nakama.circlo.R
 import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentLoginBinding
 import com.nakama.circlo.utils.Constants.SERVER_CLIENT_ID
+import com.nakama.circlo.utils.confirmDialog
 import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.toast
@@ -83,7 +84,10 @@ class LoginFragment : Fragment() {
 
             }
             btnLogin.setOnClickListener {
-                validateLogin()
+                viewLifecycleOwner.lifecycleScope.launch {
+                    fcmToken = viewmodel.getFcmToken()
+                    validateLogin()
+                }
             }
         }
     }
@@ -118,8 +122,18 @@ class LoginFragment : Fragment() {
                 is Result.Error -> {
                     binding.progressIndicator.hide()
                     binding.btnLogin.isEnabled = true
-                    toast(it.error)
+                    confirmDialog(
+                        requireContext(),
+                        "Login Error",
+                        it.error,
+                        "Continue",
+                        ""
+                    ) {
+                        binding.edLoginEmail.setText("")
+                        binding.edLoginPassword.setText("")
+                    }
                 }
+
             }
         }
     }

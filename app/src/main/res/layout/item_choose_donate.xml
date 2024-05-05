@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_16sdp"
-            android:text="Pilih Jenis Donasi"
+            android:text="@string/choose_donate_method"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
@@ -34,7 +34,7 @@
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:paddingHorizontal="@dimen/_16sdp"
-            android:text="Self-service"
+            android:text="@string/self_service"
             app:layout_constraintEnd_toStartOf="@id/btn_pickup"
             app:layout_constraintTop_toBottomOf="@id/tv_choose_doante"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -45,7 +45,7 @@
             android:minWidth="@dimen/_80sdp"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:text="Pickup"
+            android:text="@string/pickup"
             app:layout_constraintStart_toEndOf="@id/btn_self_service"
             app:layout_constraintTop_toBottomOf="@id/tv_choose_doante"
             app:layout_constraintEnd_toEndOf="parent"/>

@@ -90,29 +90,28 @@
                             android:text="Title"
                             android:textColor="@color/black"
                             android:fontFamily="@font/roboto_medium"
-                            android:textSize="@dimen/_16ssp"
-                            android:layout_toEndOf="@id/ic_pickUp"/>
+                            android:textSize="@dimen/_16ssp" />
 
                         <TextView
                             android:id="@+id/tv_potential"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Potensial Harga"
+                            android:text="@string/potensial_harga"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:textColor="@color/greenLight"
                             android:fontFamily="@font/roboto"
-                            android:textSize="@dimen/_14ssp"
-                            android:layout_toEndOf="@id/ic_pickUp"/>
+                            android:textSize="@dimen/_14ssp" />
                         <TextView
                             android:id="@+id/tv_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rp20.000 - 30.000"
+                            android:text=""
                             android:layout_marginTop="@dimen/_2sdp"
                             android:textColor="@color/greenLight"
                             android:fontFamily="@font/roboto"
                             android:textSize="@dimen/_12ssp"
-                            android:layout_toEndOf="@id/ic_pickUp"/>
+                            android:layout_toEndOf="@id/ic_pickUp"
+                            tools:text="Rp20.000 - 30.000"/>
 
 
                     </LinearLayout>
@@ -141,7 +140,7 @@
                         android:id="@+id/tv_title_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Product Description"
+                        android:text="@string/product_description"
                         android:textColor="@color/greenLight"
                         android:fontFamily="@font/roboto_medium"
                         android:textSize="@dimen/_16ssp"
@@ -151,18 +150,19 @@
                         android:id="@+id/tv_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Long Description dmsladmsa andsnadn dnakjsndjsa ndkjasndak dnkasnd ndjasnd dnkasdkamdksamdlmaslm dlaskm"
+                        android:text=""
                         android:textColor="@color/inverseSurface"
                         android:fontFamily="@font/roboto"
                         android:justificationMode="inter_word"
                         android:layout_marginTop="@dimen/_8sdp"
-                        android:textSize="@dimen/_14ssp" />
+                        android:textSize="@dimen/_14ssp"
+                        tools:text="Long Description dmsladmsa andsnadn dnakjsndjsa ndkjasndak dnkasnd ndjasnd dnkasdkamdksamdlmaslm dlaskm"/>
 
                     <TextView
                         android:id="@+id/tv_title_benefit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Benefit"
+                        android:text="@string/benefits"
                         android:textColor="@color/greenLight"
                         android:fontFamily="@font/roboto_medium"
                         android:layout_marginTop="@dimen/_16sdp"
@@ -188,7 +188,7 @@
                 android:id="@+id/tv_title_tutorial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tutorial"
+                android:text="@string/tutorial"
                 android:textColor="@color/inverseSurface"
                 android:fontFamily="@font/roboto_medium"
                 android:layout_marginTop="@dimen/_8sdp"
@@ -214,7 +214,7 @@
                 android:id="@+id/tv_title_more_ideas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="More Ideas"
+                android:text="@string/more_ideas"
                 android:textColor="@color/inverseSurface"
                 android:fontFamily="@font/roboto_medium"
                 android:layout_marginTop="@dimen/_8sdp"

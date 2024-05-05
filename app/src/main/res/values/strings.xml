@@ -1,34 +1,100 @@
 <resources>
     <string name="app_name">Circlo</string>
-    <string name="Home">Home</string>
-    <string name="order">Order</string>
-    <string name="Profile">Profile</string>
-    <string name="community">Community</string>
+    <string name="Home" translatable="false">Home</string>
+    <string name="order" translatable="false">Order</string>
+    <string name="Profile" translatable="false">Profile</string>
+    <string name="community" translatable="false">Community</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_notification">Button Notification</string>
     <string name="introduction_banner">Introduction Banner</string>
     <string name="get_started">Get Started</string>
     <string name="next">Next</string>
-    <string name="first_slide_title">Selamat datang di CIRCLO, Ayo kita sama-sama menyelematkan bumi</string>
-    <string name="second_slide_title">Donasi sampah dan tukar dengan poin reward</string>
-    <string name="third_slide_title">Buat produk kerajinanmu ditemani dengan CIRCLO</string>
+    <string name="first_slide_title">Welcome to CIRCLO, let\'s save the earth together</string>
+    <string name="second_slide_title">Donate trash and exchange for reward points</string>
+    <string name="third_slide_title">Make your craft products accompanied by CIRCLO</string>
     <string name="enter_valid_email_address">Please enter valid email address</string>
     <string name="enter_valid_password">Password must contain at least 8 character</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="login" translatable="false">Login</string>
     <string name="email_address">Email Address</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="username">Username</string>
+    <string name="username" translatable="false">Username</string>
     <string name="have_an_account">"Don't have an account? "</string>
     <string name="register_here">Register here</string>
     <string name="register">Register</string>
     <string name="add_description_here">Add description here...</string>
     <string name="add_post">Add Post</string>
     <string name="product_idea">Product Idea</string>
-    <string name="yeayy_donasimu_berhasil">Yeayy, Donasimu berhasil!</string>
-    <string name="donasimu_sedang_diproses_oleh_tim_kami">Donasimu sedang diproses oleh tim kami</string>
+    <string name="yeayy_donasimu_berhasil">Yeayy, your donation was successful!</string>
+    <string name="donasimu_sedang_diproses_oleh_tim_kami">Your donation is being processed by our team</string>
     <string name="back_to_home">Back to Home</string>
     <string name="success_donate">Success Donate</string>
+    <string name="set_main_address">Set as Main Address</string>
+    <string name="save">Save</string>
+    <string name="post_now">Post Now</string>
+    <string name="my_address">My Address</string>
+    <string name="circlo_community">Circlo Community</string>
+    <string name="address_detail_hint">Address Detail \nex :Rumah Warna hijau</string>
+    <string name="address_title">Address Title</string>
+    <string name="detail_donation">Detail Donation</string>
+    <string name="type_donation">Type donation</string>
+    <string name="donation_id">Donation ID</string>
+    <string name="donate_status">Donate Status</string>
+    <string name="refresh_page">Refresh Page</string>
+    <string name="donate_detail">Donate Detail</string>
+    <string name="donate_weight">Donate Weight</string>
+    <string name="to_be_confirmed">To be confirmed</string>
+    <string name="donation_desc">Donation Desc</string>
+    <string name="potential_point">Potential Point</string>
+    <string name="donate_image">Donate Image</string>
+    <string name="cancel_donation">Cancel Donation</string>
+    <string name="potensial_harga">Potential Price</string>
+    <string name="product_description">Product Description</string>
+    <string name="benefits">Benefits</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="more_ideas" translatable="false">More Ideas</string>
+    <string name="easy_donate">Donation is easy, just wait from home</string>
+    <string name="choose_trash_type">Choose Type Trash</string>
+    <string name="organik">Organic</string>
+    <string name="anorganik">Anorganik</string>
+    <string name="b3_waste">B3 Waste</string>
+    <string name="add_trash_foto">Add Trash Foto</string>
+    <string name="you_must_login_first">You must login first</string>
+    <string name="login_now">Login now</string>
+    <string name="greeting_text">Have you recycled your waste today?</string>
+    <string name="circlo_point" translatable="false">Circlo Point</string>
+    <string name="redeem">Redeem</string>
+    <string name="pickup_explanation">Circlo partners will pick up your trash</string>
+    <string name="drop_off">Drop Off</string>
+    <string name="drop_off_explanation">Deliver your trash directly</string>
+    <string name="explore_explanation">Look for inspiration for recycling waste</string>
+    <string name="circlo_login">Circlo Login</string>
+    <string name="donate_history">Donate History</string>
+    <string name="title_address_drop_off">Jl. Gunung Anyar Jaya 2, Surabaya, Jatim</string>
+    <string name="detail_address">Near Transmart Mall</string>
+    <string name="change">Change</string>
+    <string name="pickup_date">Pick-up date</string>
+    <string name="pickup_time">Pickup Time</string>
+    <string name="pickup_location">Pickup Location</string>
+    <string name="drop_off_date">Drop off date</string>
+    <string name="drop_off_item">Drop off time</string>
+    <string name="donate_now">Donate now</string>
+    <string name="chane_profile">Change Profile</string>
+    <string name="list_address">List Adress</string>
+    <string name="guidelines">Guidelines</string>
+    <string name="app_version">App version</string>
+    <string name="subtitle_text_scan">Below are the results of your trash scan</string>
+    <string name="continue_donasi">Continue Donation</string>
+    <string name="lets_recycling">Lets Recycling</string>
+    <string name="trash_detail">Trash Detail</string>
+    <string name="ide_produk_kerjainan">Craft Product Ideas</string>
+    <string name="choose_donate_method">Select Donation Type</string>
+    <string name="self_service" translatable="false">Self-service</string>
+    <string name="pickup" translatable="false">Pickup</string>
+    <string name="terms_conditions">Terms and Conditions</string>
+    <string name="choose_drop_point">Choose Drop Point</string>
+    <string name="info_limited_drop_point">Sorry, currently drop points are limited to only 1 location</string>
+    <string name="info_dev_mode">This feature is still in the development stage</string>
 </resources>
