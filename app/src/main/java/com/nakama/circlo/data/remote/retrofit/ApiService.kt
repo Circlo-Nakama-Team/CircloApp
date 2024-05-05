@@ -1,6 +1,7 @@
 package com.nakama.circlo.data.remote.retrofit
 
 import com.nakama.circlo.data.remote.response.AddressResponse
+import com.nakama.circlo.data.remote.response.ArticleResponse
 import com.nakama.circlo.data.remote.response.AuthResponse
 import com.nakama.circlo.data.remote.response.CertainDonateResponse
 import com.nakama.circlo.data.remote.response.CommunityResponse
@@ -123,6 +124,10 @@ interface ApiService {
     // Community
     @GET("community")
     suspend fun getCommunityPost(): CommunityResponse
+
+    // Article
+    @GET("trash/article")
+    suspend fun getArticles(): ArticleResponse
 
     @Multipart
     @POST("community/post")

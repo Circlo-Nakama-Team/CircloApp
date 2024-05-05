@@ -20,6 +20,7 @@
         android:layout_margin="@dimen/_16sdp"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true">
 

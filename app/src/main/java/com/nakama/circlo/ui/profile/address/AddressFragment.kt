@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.profile.address
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,7 +19,9 @@ import com.nakama.circlo.ui.SharedViewModel
 import com.nakama.circlo.ui.profile.viewmodel.ProfileViewModel
 import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.singleton.DataSingleton
+import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -31,6 +34,7 @@ class AddressFragment : Fragment() {
     private val sharedViewModel by viewModels<SharedViewModel>()
     private lateinit var addressUserAdapter: AddressUserAdapter
     private var isPickup = false
+    private var loadingDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +53,7 @@ class AddressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
         isPickup = AddressFragmentArgs.fromBundle(arguments as Bundle).isPickup
         if (isPickup) binding.tvTitleAppbar.text = "Ubah Alamat"
         getDetailProfile("Bearer ${DataSingleton.getInstance().userToken}")
@@ -60,9 +65,10 @@ class AddressFragment : Fragment() {
         sharedViewModel.getProfile(token).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-
+                    loadingDialog?.show()
                 }
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     val responseData = it.data.data
                     if (responseData?.address?.isEmpty() == true) {
                         binding.ivEmpty.show()
@@ -71,7 +77,8 @@ class AddressFragment : Fragment() {
                     setupRvAddress(responseData?.address, responseData?.user?.mainAddressId.toString())
                 }
                 is Result.Error -> {
-                    Log.d("Get Profile", it.error)
+                    loadingDialog?.cancel()
+                    toast(it.error)
                 }
             }
         }

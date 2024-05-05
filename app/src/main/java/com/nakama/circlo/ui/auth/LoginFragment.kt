@@ -110,17 +110,17 @@ class LoginFragment : Fragment() {
         viewmodel.login(email, password, fcmToken).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    binding.progressIndicator.show()
+                    loadingDialog?.show()
                     binding.btnLogin.isEnabled = false
                 }
                 is Result.Success -> {
-                    binding.progressIndicator.hide()
+                    loadingDialog?.cancel()
                     toast("Login Success")
                     Log.d("User Token Login", it.data.data?.credential.toString())
                     navigateToHome(it.data.data?.credential.toString())
                 }
                 is Result.Error -> {
-                    binding.progressIndicator.hide()
+                    loadingDialog?.cancel()
                     binding.btnLogin.isEnabled = true
                     confirmDialog(
                         requireContext(),

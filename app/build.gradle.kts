@@ -6,6 +6,8 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    id("com.google.firebase.firebase-perf")
 }
 
 android {
@@ -55,6 +57,11 @@ dependencies {
     implementation("androidx.credentials:credentials-play-services-auth:1.3.0-alpha03")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-perf")
+
     val lifecycle_version = "2.5.0"
 
     implementation("androidx.core:core-ktx:1.9.0")

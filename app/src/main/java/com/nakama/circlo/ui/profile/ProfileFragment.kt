@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.profile
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import com.nakama.circlo.utils.confirmDialog
 import com.nakama.circlo.utils.glide
 import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.showBottomNavView
 import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +30,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<ProfileViewModel>()
+    private var loadingDialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +45,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
         getUserToken()
     }
 
@@ -82,17 +86,16 @@ class ProfileFragment : Fragment() {
         viewModel.getProfile(token).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    binding.progressBar.show()
+                    loadingDialog?.show()
                 }
                 is Result.Success -> {
-                    binding.progressBar.hide()
-                    Log.d("User Detail", it.data.toString())
+                    loadingDialog?.cancel()
                     binding.tvName.text = it.data.data?.user?.username
                     binding.ivProfil.glide(it.data.data?.user?.image.toString())
                     binding.tvPoint.text = it.data.data?.user?.point.toString()
                 }
                 is Result.Error -> {
-                    binding.progressBar.hide()
+                    loadingDialog?.cancel()
                     binding.btnLogin.isEnabled = true
                     Log.d("LoginFragment", it.error)
                 }

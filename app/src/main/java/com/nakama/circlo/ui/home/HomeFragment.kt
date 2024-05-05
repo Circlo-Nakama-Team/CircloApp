@@ -1,6 +1,7 @@
 package com.nakama.circlo.ui.home
 
 import android.Manifest
+import android.app.Dialog
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -14,16 +15,21 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import com.nakama.circlo.R
+import com.nakama.circlo.adapter.ArticlesAdapter
 import com.nakama.circlo.data.Result
+import com.nakama.circlo.data.remote.response.ArticlesItem
 import com.nakama.circlo.databinding.FragmentHomeBinding
+import com.nakama.circlo.ui.SharedViewModel
 import com.nakama.circlo.utils.confirmDialog
 import com.nakama.circlo.utils.glide
 import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.setupConfirmDonateDialog
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.showBottomNavView
 import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +42,14 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<HomeViewModel>()
+    private val sharedViewModel by viewModels<SharedViewModel>()
+    private lateinit var articlesAdapter: ArticlesAdapter
+    private var loadingDialog: Dialog? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        articlesAdapter = ArticlesAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,11 +64,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
         getUserToken()
         askNotificationPermission()
         viewLifecycleOwner.lifecycleScope.launch {
             getFcmToken()
         }
+        setupRv()
+        getArticles()
     }
 
     private fun getUserToken() {
@@ -100,9 +117,10 @@ class HomeFragment : Fragment() {
         viewModel.getProfile(token).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-
+                    loadingDialog?.show()
                 }
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     binding.tvName.text = "Halo, ${it.data.data?.user?.username}"
                     binding.ivProfile.glide(it.data.data?.user?.image!!)
                     binding.tvTotalPoint.text = it.data.data.user.point.toString()
@@ -166,6 +184,39 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun setupRv() {
+        binding.rvListArticle.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
+    private fun setupRvArticles(listArticle: List<ArticlesItem>) {
+        binding.rvListArticle.adapter = articlesAdapter
+        articlesAdapter.addAllItem(listArticle)
+        articlesAdapter.setFromHomeSource(true)
+        articlesAdapter.onItemClick = {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToArticleDetailFragment(it))
+        }
+    }
+
+    private fun getArticles() {
+        sharedViewModel.getArticles().observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Loading -> {
+                    loadingDialog?.show()
+                }
+                is Result.Success -> {
+                    loadingDialog?.cancel()
+                    val responseData = it.data.data
+                    setupRvArticles(responseData?.articles!!)
+                }
+                is Result.Error -> {
+                    Log.d("Get Articles", it.error)
+                }
+            }
+        }
+    }
+
     private fun confirmLogin() {
             confirmDialog(
                 requireContext(),
@@ -212,5 +263,10 @@ class HomeFragment : Fragment() {
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        loadingDialog?.cancel()
     }
 }

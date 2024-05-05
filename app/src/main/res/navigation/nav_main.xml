@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_pickUpFragment"
             app:destination="@id/pickUpFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/communityFragment"
@@ -196,6 +199,15 @@
         tools:layout="@layout/fragment_detail_address" >
         <argument
             android:name="addressId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="com.nakama.circlo.ui.article.ArticleDetailFragment"
+        android:label="fragment_article_detail"
+        tools:layout="@layout/fragment_article_detail" >
+        <argument
+            android:name="url"
             app:argType="string" />
     </fragment>
 </navigation>

@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.community
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.nakama.circlo.data.remote.response.PostsItem
 import com.nakama.circlo.databinding.FragmentCommunityBinding
 import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.showBottomNavView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +27,7 @@ class CommunityFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: PostItemAdapter
     private val viewModel by viewModels<CommunityViewModel>()
+    private var loadingDialog: Dialog? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -42,7 +45,7 @@ class CommunityFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        loadingDialog = showAnimationDialog()
         setupRv()
         validateUserToken()
     }
@@ -61,10 +64,10 @@ class CommunityFragment : Fragment() {
         viewModel.getCommunity().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
-                    binding.progressBar.show()
+                    loadingDialog?.show()
                 }
                 is Result.Success -> {
-                    binding.progressBar.hide()
+                    loadingDialog?.cancel()
                     setUpRvPost(result.data.data?.posts!!)
                     Log.d("Get Community", result.data.data.posts.toString())
                 }

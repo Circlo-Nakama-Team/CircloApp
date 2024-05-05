@@ -21,4 +21,5 @@ class SharedViewModel @Inject constructor(
 
     fun getProfile(token: String) = repository.getProfile(token)
     fun getDetailAddress(token: String, addressId: String) = repository.getDetailAddress(token, addressId)
+    fun getArticles() = repository.getArticle()
 }

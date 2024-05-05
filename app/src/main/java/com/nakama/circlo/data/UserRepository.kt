@@ -5,6 +5,7 @@ import androidx.lifecycle.liveData
 import com.google.gson.Gson
 import com.nakama.circlo.data.pref.DataStoreManager
 import com.nakama.circlo.data.remote.response.AddressResponse
+import com.nakama.circlo.data.remote.response.ArticleResponse
 import com.nakama.circlo.data.remote.response.AuthResponse
 import com.nakama.circlo.data.remote.response.CertainDonateResponse
 import com.nakama.circlo.data.remote.response.CommunityResponse
@@ -157,6 +158,20 @@ class UserRepository @Inject constructor(
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    // Article
+    fun getArticle() : LiveData<Result<ArticleResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getArticles()
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ArticleResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
         }
     }
 

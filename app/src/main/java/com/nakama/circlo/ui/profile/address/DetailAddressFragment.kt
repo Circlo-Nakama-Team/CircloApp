@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.profile.address
 
+import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,6 +21,7 @@ import com.nakama.circlo.ui.profile.viewmodel.ProfileViewModel
 import com.nakama.circlo.utils.hide
 import com.nakama.circlo.utils.hideBottomNavView
 import com.nakama.circlo.utils.show
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.singleton.DataSingleton
 import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +35,7 @@ class DetailAddressFragment : Fragment() {
     private val sharedViewModel by viewModels<SharedViewModel>()
     private var isNewAddress: Boolean = false
     lateinit var addressId: String
+    private var loadingDialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +50,8 @@ class DetailAddressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
+
         addressId = DetailAddressFragmentArgs.fromBundle(arguments as Bundle).addressId
         validateBtnSave()
         getDetailProfile("Bearer ${DataSingleton.getInstance().userToken}")
@@ -56,15 +61,17 @@ class DetailAddressFragment : Fragment() {
         sharedViewModel.getProfile(token).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-
+                    loadingDialog?.show()
                 }
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     val responseData = it.data.data
                     isNewAddress = responseData?.address.isNullOrEmpty()
                     setupUI(token, responseData?.user?.mainAddressId.toString())
                 }
                 is Result.Error -> {
-                    Log.d("Get Profile", it.error)
+                    loadingDialog?.cancel()
+                    toast(it.error)
                 }
             }
         }
@@ -126,15 +133,16 @@ class DetailAddressFragment : Fragment() {
             when (it) {
                 is Result.Loading -> {
                     binding.btnSave.isEnabled = false
-                    binding.progressBar.show()
+                    loadingDialog?.show()
                 }
 
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     findNavController().navigateUp()
                 }
 
                 is Result.Error -> {
-                    binding.progressBar.hide()
+                    loadingDialog?.cancel()
                     binding.btnSave.isEnabled = true
                     Log.d("Update Main Address", it.error)
                     toast(it.error)
@@ -152,17 +160,18 @@ class DetailAddressFragment : Fragment() {
             when (it) {
                 is Result.Loading -> {
                     binding.btnSave.isEnabled = false
-                    binding.progressBar.show()
+                    loadingDialog?.show()
                 }
 
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     if (binding.swMainAddress.isChecked) {
                         updateMainAddress(token, it.data.data?.addressId.toString())
                     } else findNavController().navigateUp()
                 }
 
                 is Result.Error -> {
-                    binding.progressBar.hide()
+                    loadingDialog?.cancel()
                     binding.btnSave.isEnabled = true
                     toast(it.error)
                 }
@@ -181,17 +190,18 @@ class DetailAddressFragment : Fragment() {
             when (it) {
                 is Result.Loading -> {
                     binding.btnSave.isEnabled = false
-                    binding.progressBar.show()
+                    loadingDialog?.show()
                 }
 
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     if (binding.swMainAddress.isChecked) {
                         updateMainAddress(token, addressId)
                     } else findNavController().navigateUp()
                 }
 
                 is Result.Error -> {
-                    binding.progressBar.hide()
+                    loadingDialog?.cancel()
                     binding.btnSave.isEnabled = true
                     toast(it.error)
                 }
@@ -204,9 +214,10 @@ class DetailAddressFragment : Fragment() {
         sharedViewModel.getDetailAddress(token, addressId).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-
+                    loadingDialog?.show()
                 }
                 is Result.Success -> {
+                    loadingDialog?.cancel()
                     val responseData = it.data.dataAddress?.addressData?.first()
                     binding.apply {
                         edAddressTitle.setText(responseData?.title)
@@ -216,7 +227,8 @@ class DetailAddressFragment : Fragment() {
                     if (addressId == mainAddressId) binding.swMainAddress.isChecked = true
                 }
                 is Result.Error -> {
-                    Log.d("Get Address", it.error)
+                    loadingDialog?.cancel()
+                    toast(it.error)
                 }
             }
         }

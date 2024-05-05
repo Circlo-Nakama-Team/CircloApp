@@ -19,12 +19,12 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/communityFragment"
-        android:icon="@drawable/ic_chat"
+        android:icon="@drawable/ic_community"
         app:showAsAction="ifRoom"
         android:title="@string/community" />
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_person"
+        android:icon="@drawable/ic_person_2"
         app:showAsAction="ifRoom"
         android:title="@string/Profile" />
 </menu>

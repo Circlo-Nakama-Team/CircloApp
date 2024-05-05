@@ -1,5 +1,6 @@
 package com.nakama.circlo.ui.auth
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.nakama.circlo.data.Result
 import com.nakama.circlo.databinding.FragmentRegisterBinding
 import com.nakama.circlo.utils.confirmDialog
 import com.nakama.circlo.utils.hideBottomNavView
+import com.nakama.circlo.utils.showAnimationDialog
 import com.nakama.circlo.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,6 +24,7 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private val viewmodel by viewModels<AuthViewModel>()
+    private var loadingDialog: Dialog? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -35,6 +38,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingDialog = showAnimationDialog()
         setupAction()
     }
 
@@ -82,11 +86,11 @@ class RegisterFragment : Fragment() {
         viewmodel.register(firstname, lastname, username, email, password).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    binding.progressIndicator.show()
+                    loadingDialog?.show()
                     binding.btnRegister.isEnabled = false
                 }
                 is Result.Success -> {
-                    binding.progressIndicator.hide()
+                    loadingDialog?.cancel()
                     confirmDialog(
                         requireContext(),
                         "Register Success",
@@ -98,7 +102,7 @@ class RegisterFragment : Fragment() {
                     }
                 }
                 is Result.Error -> {
-                    binding.progressIndicator.hide()
+                    loadingDialog?.cancel()
                     binding.btnBack.isEnabled = true
                     toast(it.error)
                 }

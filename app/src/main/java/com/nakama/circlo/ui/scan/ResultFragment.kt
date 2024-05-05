@@ -103,18 +103,15 @@ class ResultFragment : Fragment() {
         viewModel.scanTrash(token, image).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    binding.progressBar.show()
                     loadingDialog?.show()
                 }
                 is Result.Success -> {
-                    binding.progressBar.hide()
                     loadingDialog?.cancel()
                     trashAdapter.differ.submitList(it.data.data?.trashIdeas)
                     setupRvTrash()
                     setupAction(it.data.data!!)
                 }
                 is Result.Error -> {
-                    binding.progressBar.hide()
                     loadingDialog?.cancel()
                     Log.e("Scan Trash", it.error)
                     toast(it.error)

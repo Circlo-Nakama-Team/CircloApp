@@ -85,4 +85,6 @@
     <string name="choose_drop_point">Pilih Drop Point</string>
     <string name="info_limited_drop_point">Maaf untuk saat ini drop point terbatas hanya 1 lokasi</string>
     <string name="info_dev_mode">Fitur ini masih dalam tahap pengembangan</string>
+    <string name="article_detail">Detail Artikel</string>
+    <string name="latest_news">Berita Terbaru</string>
 </resources>
