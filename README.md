@@ -50,5 +50,5 @@ Based on advice from my mentor, I tested real users using Firebase:
 ![](https://github.com/Circlo-Nakama-Team/.github/blob/main/firebase_analytics.png)
 
 ### App Distribution for easily invite real user testing
-![](https://github.com/Circlo-Nakama-Team/.github/blob/main/testing_testlab.png)
+![](https://github.com/Circlo-Nakama-Team/.github/blob/main/firebase_appdist.png)
 
